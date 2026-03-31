@@ -1,0 +1,20 @@
+# Configuración de estilo para el portfolio Markdown
+# Puedes personalizar los colores, fuentes y detalles visuales
+
+style:
+  background_color: "#f7f7fa"
+  menu_background: "#232946"
+  menu_text: "#fff"
+  menu_active: "#eebbc3"
+  content_background: "#fff"
+  content_text: "#232946"
+  accent: "#eebbc3"
+  border_radius: "12px"
+  font_family: "'Segoe UI', 'Arial', sans-serif"
+  heading_weight: 700
+  body_weight: 400
+  shadow: "0 2px 12px rgba(44,62,80,0.08)"
+
+# Nota: Este archivo es solo informativo para que puedas aplicar estilos en un generador de páginas estáticas
+# o para futuras integraciones. GitHub y VS Code no aplican estilos desde YAML por defecto.
+# Si usas un generador como MkDocs, puedes adaptar estos valores en su config.

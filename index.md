@@ -38,13 +38,15 @@ Me llamo Nerea y soy una apasionada de la ciberseguridad, la tecnología y el ap
 
 <h2 id="estudios">Estudios</h2>
 
-- Grado Superior en Administración de Sistemas Informáticos en Red (ASIR)
-- Formación en Ciberseguridad y Hacking Ético
+- Grado Superior en Técnico en Desarrollo de Aplicaciones Multiplataformas (DAM)
+- Especialización en Ciberseguridad
 
 <h2 id="contacto">Contacto</h2>
 
-- Email: nerea.tucorreo@example.com
-- LinkedIn: [TuPerfilLinkedIn](https://www.linkedin.com/in/tuusuario)
+- Email: nereacandonramos@gmail.com
+
+- LinkedIn: [Nerea Candon Ramos](https://www.linkedin.com/in/nerea-candon-ramos-4112a231b?utm_source=share_via&utm_content=profile&utm_medium=member_ios)
+
 
 <h2 id="writeups">Write-ups de Máquinas de Windows</h2>
 
@@ -63,7 +65,6 @@ Selecciona una máquina para acceder a su write-up:
 
 ---
 
-> Repositorio privado en GitHub. Recuerda invitar al profesor (@0xmrivas).
 
 		</td>
 	</tr>
