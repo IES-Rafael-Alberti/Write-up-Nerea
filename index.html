@@ -12,18 +12,18 @@
         <nav class="sidebar">
             <h1>Portfolio</h1>
             <ul>
-                <li><a href="#" onclick="showSection('sobre-mi')">Sobre mí</a></li>
-                <li><a href="#" onclick="showSection('contacto')">Contacto</a></li>
-                <li><a href="#" onclick="showSection('proyectos')">Proyectos</a>
+                <li><a href="#sobre-mi" onclick="navigateMenu(event, 'sobre-mi')">Sobre mí</a></li>
+                <li><a href="#contacto" onclick="navigateMenu(event, 'contacto')">Contacto</a></li>
+                <li><a href="#proyectos" onclick="navigateMenu(event, 'proyectos')">Proyectos</a>
                     <ul class="submenu">
-                        <li><a href="#" onclick="loadWriteup('Anthem')">Anthem</a></li>
-                        <li><a href="#" onclick="loadWriteup('Blaster')">Blaster</a></li>
-                        <li><a href="#" onclick="loadWriteup('Blue')">Blue</a></li>
-                        <li><a href="#" onclick="loadWriteup('Ice')">Ice</a></li>
-                        <li><a href="#" onclick="loadWriteup('Library')">Library</a></li>
-                        <li><a href="#" onclick="loadWriteup('Retro_CTF')">Retro_CTF</a></li>
-                        <li><a href="#" onclick="loadWriteup('Revelant')">Revelant</a></li>
-                        <li><a href="#" onclick="loadWriteup('Tech_Supp0rt')">Tech_Supp0rt</a></li>
+                        <li><a href="#Anthem" onclick="navigateWriteup(event, 'Anthem')">Anthem</a></li>
+                        <li><a href="#Blaster" onclick="navigateWriteup(event, 'Blaster')">Blaster</a></li>
+                        <li><a href="#Blue" onclick="navigateWriteup(event, 'Blue')">Blue</a></li>
+                        <li><a href="#Ice" onclick="navigateWriteup(event, 'Ice')">Ice</a></li>
+                        <li><a href="#Library" onclick="navigateWriteup(event, 'Library')">Library</a></li>
+                        <li><a href="#Retro_CTF" onclick="navigateWriteup(event, 'Retro_CTF')">Retro_CTF</a></li>
+                        <li><a href="#Revelant" onclick="navigateWriteup(event, 'Revelant')">Revelant</a></li>
+                        <li><a href="#Tech_Supp0rt" onclick="navigateWriteup(event, 'Tech_Supp0rt')">Tech_Supp0rt</a></li>
                     </ul>
                 </li>
             </ul>
@@ -72,14 +72,37 @@
                     return response.text();
                 })
                 .then(md => {
-                    document.getElementById('writeup-viewer').innerHTML = marked.parse(md);
+                    document.getElementById('writeup-viewer').innerHTML = marked.parse(md, {gfm: true, breaks: true});
                 })
                 .catch(err => {
                     document.getElementById('writeup-viewer').innerHTML = '<p style="color:red;">No se pudo cargar el write-up.</p>';
                 });
         }
-        // Mostrar sección principal al cargar
-        showSection('sobre-mi');
+        function navigateMenu(event, sectionId) {
+            event.preventDefault();
+            window.location.hash = sectionId;
+            showSection(sectionId);
+        }
+        function navigateWriteup(event, machine) {
+            event.preventDefault();
+            window.location.hash = machine;
+            loadWriteup(machine);
+        }
+        function handleHashChange() {
+            const hash = window.location.hash.replace('#', '');
+            const sections = ['sobre-mi', 'contacto', 'proyectos'];
+            const machines = ['Anthem','Blaster','Blue','Ice','Library','Retro_CTF','Revelant','Tech_Supp0rt'];
+            if (sections.includes(hash)) {
+                showSection(hash);
+            } else if (machines.includes(hash)) {
+                loadWriteup(hash);
+            } else {
+                showSection('sobre-mi');
+            }
+        }
+        window.addEventListener('hashchange', handleHashChange);
+        // Mostrar sección según hash al cargar
+        handleHashChange();
     </script>
 </body>
 </html>
