@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio de Nerea</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <nav class="sidebar">
+            <h1>Portfolio</h1>
+            <ul>
+                <li><a href="#" onclick="showSection('sobre-mi')">Sobre mí</a></li>
+                <li><a href="#" onclick="showSection('contacto')">Contacto</a></li>
+                <li><a href="#" onclick="showSection('proyectos')">Proyectos</a>
+                    <ul class="submenu">
+                        <li><a href="#" onclick="loadWriteup('Anthem')">Anthem</a></li>
+                        <li><a href="#" onclick="loadWriteup('Blaster')">Blaster</a></li>
+                        <li><a href="#" onclick="loadWriteup('Blue')">Blue</a></li>
+                        <li><a href="#" onclick="loadWriteup('Ice')">Ice</a></li>
+                        <li><a href="#" onclick="loadWriteup('Library')">Library</a></li>
+                        <li><a href="#" onclick="loadWriteup('Retro_CTF')">Retro_CTF</a></li>
+                        <li><a href="#" onclick="loadWriteup('Revelant')">Revelant</a></li>
+                        <li><a href="#" onclick="loadWriteup('Tech_Supp0rt')">Tech_Supp0rt</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+        <main class="content">
+            <section id="sobre-mi" class="section">
+                <h2>Sobre mí</h2>
+                <p>Me llamo Nerea y soy una apasionada de la ciberseguridad, la tecnología y el aprendizaje continuo.</p>
+                <h3>Estudios</h3>
+                <ul>
+                    <li>Grado Superior en Administración de Sistemas Informáticos en Red (ASIR)</li>
+                    <li>Formación en Ciberseguridad y Hacking Ético</li>
+                </ul>
+            </section>
+            <section id="contacto" class="section" style="display:none;">
+                <h2>Contacto</h2>
+                <ul>
+                    <li>Email: nerea.tucorreo@example.com</li>
+                    <li>LinkedIn: <a href="https://www.linkedin.com/in/tuusuario" target="_blank">TuPerfilLinkedIn</a></li>
+                </ul>
+            </section>
+            <section id="proyectos" class="section" style="display:none;">
+                <h2>Write-ups de Máquinas de Windows</h2>
+                <p>Selecciona una máquina en el menú para ver su write-up en formato Markdown.</p>
+                <div id="writeup-viewer" class="writeup-viewer"></div>
+            </section>
+        </main>
+    </div>
+    <footer>
+        <p>Repositorio privado en GitHub. Recuerda invitar al profesor (@0xmrivas).</p>
+    </footer>
+    <script>
+        function showSection(sectionId) {
+            document.querySelectorAll('.section').forEach(sec => sec.style.display = 'none');
+            document.getElementById(sectionId).style.display = 'block';
+            if(sectionId !== 'proyectos') {
+                document.getElementById('writeup-viewer').innerHTML = '';
+            }
+        }
+        function loadWriteup(machine) {
+            showSection('proyectos');
+            const path = `Maquinas_de_Windows/${machine}/README.md`;
+            fetch(path)
+                .then(response => {
+                    if (!response.ok) throw new Error('No se pudo cargar el write-up.');
+                    return response.text();
+                })
+                .then(md => {
+                    document.getElementById('writeup-viewer').innerHTML = marked.parse(md);
+                })
+                .catch(err => {
+                    document.getElementById('writeup-viewer').innerHTML = '<p style="color:red;">No se pudo cargar el write-up.</p>';
+                });
+        }
+        // Mostrar sección principal al cargar
+        showSection('sobre-mi');
+    </script>
+</body>
+</html>
