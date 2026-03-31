@@ -262,27 +262,11 @@ También reviso información del sistema:
 sysinfo
 ```
 
-## 12. Extracción de credenciales
-
-Con privilegios elevados puedo utilizar la extensión Kiwi (Mimikatz) para extraer credenciales almacenadas en memoria.
-
-Primero cargo la extensión:
+Utilicé el comando getsystem para escalar a privilegios del sistema máximo.
 
 ```bash
-load kiwi
+getsystem
 ```
 
-Después ejecuto:
+![admin ](./imagenes/admin.PNG)
 
-```bash
-creds_all
-```
-Este comando intenta recuperar:
-
-- hashes NTLM
-
-- contraseñas almacenadas
-
-- credenciales en memoria
-
-Con esta información es posible comprometer otras cuentas o sistemas dentro de la red.

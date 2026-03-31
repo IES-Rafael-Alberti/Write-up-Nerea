@@ -21,7 +21,7 @@ Initialization Sequence Completed
 ```
 
 Esto indica que la conexión VPN se ha realizado correctamente.
-Si vemos que no funciona, probar otro archivo de configuración hasta que se vea conectado.
+Si vemos que no funciona, probar otro archivo de configuración hasta que se vea conectado en vez de central, poner west..
 
 
 ### 1.2 Verificación de la conexión
