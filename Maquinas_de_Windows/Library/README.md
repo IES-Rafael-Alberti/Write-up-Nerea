@@ -40,7 +40,7 @@ Se ejecuta el siguiente comando:
 ```bash
 nmap -sC -sV -A -O 10.114.169.81
 ```
-![nmap](./imagenes/nmap.png)
+![nmap](imagenes/nmap.png)
 
 Los parámetros utilizados permiten obtener información detallada del sistema:
 

@@ -18,7 +18,7 @@ Initialization Sequence Completed
 ```
 Este mensaje indica que el túnel VPN se ha creado correctamente.
 
-![sudo openvpn](./imagenes/sudovpn.png)
+![sudo openvpn](imagenes/sudovpn.png)
 
 ### 1.2 Verificación de la conexión
 
@@ -33,7 +33,7 @@ La presencia de la interfaz tun0 confirma que la máquina Kali está conectada a
 ```bash
 tun0: 192.168.177.226
 ```
-![ip a](./imagenes/ipa.png)
+![ip a](imagenes/ipa.png)
 
 ## 2. Identificación de la máquina objetivo
 

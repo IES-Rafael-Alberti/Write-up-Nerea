@@ -51,7 +51,7 @@ Dado que la máquina no responde a peticiones ICMP (ping), se utiliza el paráme
 nmap -p- -sV -sC -Pn 10.129.150.203
 ```
 
-![nmap](./imagenes/nmap.png)
+![nmap](imagenes/nmap.png)
 
 Explicación del comando
 - -p- → Escanea los 65535 puertos
