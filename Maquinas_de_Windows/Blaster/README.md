@@ -68,7 +68,7 @@ Al acceder a la página web desde el navegador:
 http://10.113.152.239
 ```
 
-![servidor](./imagenes/servidor.png)
+![servidor](Maquinas_de_Windows/Blaster/imagenes/servidor.png)
 
 No se observa información relevante inicialmente, por lo que se realiza una búsqueda de directorios utilizando Gobuster.
 
@@ -76,7 +76,7 @@ No se observa información relevante inicialmente, por lo que se realiza una bú
 gobuster dir -u http://10.113.152.239 -w /usr/share/dirb/wordlists/big.txt
 ```
 
-![gobuster](./imagenes/gobuster.png)
+![gobuster](Maquinas_de_Windows/Blaster/imagenes/gobuster.png)
 
 El resultado revela el siguiente directorio oculto:
 
@@ -91,7 +91,7 @@ Al acceder a:
 ```bash
 http://10.113.152.239/retro
 ```
-![retro](./imagenes/retro.png)
+![retro](Maquinas_de_Windows/Blaster/imagenes/retro.png)
 
 se observa un blog con varios comentarios de usuarios.
 
@@ -100,7 +100,7 @@ En uno de los comentarios aparece una pista interesante:
 ```bash
 Wade
 ```
-![comentario](./imagenes/comentario.png)
+![comentario](Maquinas_de_Windows/Blaster/imagenes/comentario.png)
 
 Dejándome una nota aquí por si olvido cómo deletarlo: parzival
 
@@ -116,7 +116,7 @@ Contraseña:
 ```bash
 parzival
 ```
-![comentar](./imagenes/comentar.png)
+![comentar](Maquinas_de_Windows/Blaster/imagenes/comentar.png)
 
 ## 6. Acceso al sistema mediante RDP
 
@@ -149,9 +149,9 @@ Configuración de conexión:
 
 Con estas credenciales se obtiene acceso al escritorio remoto de la máquina.
 
-![sesion](./imagenes/sesion.png)
+![sesion](Maquinas_de_Windows/Blaster/imagenes/sesion.png)
 
-![remoto](./imagenes/remota.png)
+![remoto](Maquinas_de_Windows/Blaster/imagenes/remota.png)
 
 
 ## 7. Enumeración del sistema
@@ -184,7 +184,7 @@ Esto permite conocer:
 
 - configuración del sistema
 
-![informacion](./imagenes/systeminfo.png)
+![informacion](Maquinas_de_Windows/Blaster/imagenes/systeminfo.png)
 
 ## 8. Escalada de privilegios
 
@@ -193,9 +193,9 @@ En el escritorio del usuario se encuentra el archivo ejecutable:
 ```bash
 hhupd.exe
 ```
-![programa](./imagenes/admin.png)
+![programa](Maquinas_de_Windows/Blaster/imagenes/admin.png)
 
-![entrar](./imagenes/entrar.png)
+![entrar](Maquinas_de_Windows/Blaster/imagenes/entrar.png)
 
 Al ejecutarlo aparece una ventana de User Account Control (UAC) solicitando privilegios de administrador.
 
