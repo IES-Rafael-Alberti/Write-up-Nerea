@@ -48,7 +48,7 @@ El siguiente paso consiste en identificar los servicios expuestos en la máquina
 ```bash
  nmap -sC -sV -Pn 10.130.172.154
  ```
- ![nmap](./imagenes/nmap.png)
+ ![nmap](../imagenes/nmap.png)
 
 
 ## 3. Acceder al puerto 80 con la ip de la máquina en el navegador.
