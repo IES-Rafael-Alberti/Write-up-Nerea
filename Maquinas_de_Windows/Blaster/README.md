@@ -214,7 +214,7 @@ Una vez abierto Internet Explorer se realiza el siguiente procedimiento:
 Ctrl + S
 ```
 
-![entrar](./imagenes/ctrls.png)
+![entrar](Maquinas_de_Windows/Blaster/imagenes/ctrls.png)
 
 2. Se abre la ventana Guardar como.
 
@@ -236,6 +236,6 @@ En la consola ejecutamos:
 ```bash
 whoami
 ```
-![privilegios](./imagenes/privilegios.png)
+![privilegios](Maquinas_de_Windows/Blaster/imagenes/privilegios.png)
 
 Si la escalada se ha realizado correctamente se obtienen privilegios administrativos del sistema.

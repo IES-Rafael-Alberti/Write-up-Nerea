@@ -103,7 +103,7 @@ Verifico que todo esté configurado correctamente:
 ```bash
 show options
 ```
-![sets](./imagenes/sets.png)
+![sets](Maquinas_de_Windows/Ice/imagenes/sets.png)
 
 
 ## 5. Ejecución del exploit
@@ -113,7 +113,7 @@ Una vez configurados los parámetros, ejecuto el exploit:
 ```bash
 run
 ```
-![run](./imagenes/run.PNG)
+![run](Maquinas_de_Windows/Ice/imagenes/run.PNG)
 
 Si la explotación tiene éxito, Metasploit abre una sesión Meterpreter, que permite interactuar con el sistema comprometido.
 
@@ -147,7 +147,7 @@ Dark-PC\Dark
 ```
 Esto indica que tengo acceso al sistema, pero aún no tengo privilegios máximos.
 
-![informacion](./imagenes/informacion.png)
+![informacion](Maquinas_de_Windows/Ice/imagenes/informacion.png)
 
 ## 7. Enumeración de procesos
 
@@ -157,7 +157,7 @@ Para identificar procesos activos en el sistema utilizo:
 ps
 ```
 
-![ps](./imagenes/ps.PNG)
+![ps](Maquinas_de_Windows/Ice/imagenes/ps.PNG)
 
 Este comando muestra todos los procesos en ejecución junto con su PID, arquitectura, usuario y ruta.
 
@@ -170,7 +170,7 @@ Para intentar obtener privilegios más altos utilizo el comando:
 ```bash
 getsystem
 ```
-![getsystem](./imagenes/admin.png)
+![getsystem](Maquinas_de_Windows/Ice/imagenes/admin.png)
 
 Este comando intenta varias técnicas automáticas de escalada de privilegios dentro de Meterpreter para obtener acceso como SYSTEM.
 
@@ -194,7 +194,7 @@ Ejecuto el módulo:
 ```bash
 run
 ```
-![run 2](./imagenes/run2.png)
+![run 2](Maquinas_de_Windows/Ice/imagenes/run2.png)
 
 Este módulo analiza el sistema comprometido y sugiere exploits locales que podrían funcionar según la versión de Windows y la configuración del sistema.
 
@@ -205,7 +205,7 @@ Entre los exploits sugeridos aparece:
 ```bash
 exploit/windows/local/bypassuac_eventvwr
 ```
-![set](./imagenes/set2.png)
+![set](Maquinas_de_Windows/Ice/imagenes/set2.png)
 
 Este exploit permite evadir el Control de Cuentas de Usuario (UAC) para ejecutar código con privilegios elevados.
 
@@ -226,13 +226,13 @@ Compruebo que la configuración sea correcta:
 ```bash
 show options
 ```
-![use](./imagenes/use1.png)
+![use](Maquinas_de_Windows/Ice/imagenes/use1.png)
 
 Finalmente ejecuto el exploit:
 ```bash
 run
 ```
-![run ](./imagenes/run3.PNG)
+![run ](Maquinas_de_Windows/Ice/imagenes/run3.PNG)
 
 
 Si el exploit se ejecuta correctamente, Metasploit crea una nueva sesión Meterpreter.
@@ -268,5 +268,5 @@ Utilicé el comando getsystem para escalar a privilegios del sistema máximo.
 getsystem
 ```
 
-![admin ](./imagenes/admin.PNG)
+![admin ](Maquinas_de_Windows/Ice/imagenes/admin.PNG)
 
