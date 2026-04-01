@@ -58,7 +58,7 @@ Se ejecuta el siguiente comando:
 ```bash
 nmap -sC -sV 10.113.184.245
 ```
-![nmap](./imagenes/nmap.png)
+![nmap](Maquinas_de_Windows/Blue/imagenes/nmap.png)
 
 ## 4. Verificación de la vulnerabilidad MS17-010
 
@@ -67,7 +67,7 @@ Para confirmar si la máquina es vulnerable se utiliza un script de Nmap especí
 ```bash
 nmap --script smb-vuln-ms17-010 -p445 10.113.184.245
 ```
-![nmap](./imagenes/puerto445.png)
+![nmap](Maquinas_de_Windows/Blue/imagenes/puerto445.png)
 
 Este script comprueba si el servicio SMB es vulnerable a MS17-010.
 

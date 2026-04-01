@@ -63,7 +63,7 @@ Primero inicio el framework Metasploit desde la terminal de Kali:
 ```bash
 msfconsole
 ```
-![msfconsole](./imagenes/msfconsole.PNG)
+![msfconsole](Maquinas_de_Windows/Ice/imagenes/msfconsole.PNG)
 
 Una vez cargado el entorno de Metasploit, busco exploits relacionados con Icecast:
 
@@ -76,7 +76,7 @@ El resultado muestra el siguiente módulo vulnerable:
 ```bash
 exploit/windows/http/icecast_header
 ```
-![use 0](./imagenes/use0.png)
+![use 0](Maquinas_de_Windows/Ice/imagenes/use0.png)
 
 ### 4.2 Cargar el exploit
 

@@ -76,7 +76,7 @@ Para ello se introduce la dirección de la máquina objetivo:
 ```bash
 http://10.130.176.237
 ```
-![url](./imagenes/url.png)
+![url](Maquinas_de_Windows/Retro_CTF/imagenes/url.png)
 
 Al cargar la página se observa el sitio por defecto del servidor Microsoft IIS 10.0. Esta página no proporciona información relevante inicialmente, por lo que se procede a realizar una enumeración de directorios en el servidor web.
 

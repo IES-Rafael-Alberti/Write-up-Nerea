@@ -69,7 +69,7 @@ Al cargar la página se muestra un sitio web con el título:
 ```bash
 Welcome to Blog - Library Machine
 ```
-![pagina](./imagenes/pagina.png)
+![pagina](Maquinas_de_Windows/Library/imagenes/pagina.png)
 
 Se trata de un blog sencillo relacionado con una biblioteca. Aunque la página es simple, proporciona un punto de partida para continuar con la fase de enumeración del servidor web.
 

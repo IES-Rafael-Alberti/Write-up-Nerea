@@ -66,7 +66,7 @@ Tras identificar el recurso compartido **websvr**, se procede a acceder a él si
 ```bash
 smbclient //10.129.170.255/websvr -N
 ```
-![websvr](./imagenes/websvr.png)
+![websvr](Maquinas_de_Windows/Tech_Supp0rt/imagenes/websvr.png)
 
 Una vez dentro, se listan los archivos disponibles:
 
