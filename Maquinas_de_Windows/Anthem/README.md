@@ -48,7 +48,7 @@ El siguiente paso consiste en identificar los servicios expuestos en la máquina
 ```bash
  nmap -sC -sV -Pn 10.130.172.154
  ```
-![nmap](imagenes/nmap.png)
+![nmap](Maquinas_de_Windows/Anthem/imagenes/nmap.png)
 
 
 ## 3. Acceder al puerto 80 con la ip de la máquina en el navegador.
@@ -58,7 +58,7 @@ En el puerto 80 nos encontramos una página web con el nombre de la maquina y un
 ```bash
 http://10.130.172.154
 ```
-![url80](imagenes/url80.png)
+![url80](Maquinas_de_Windows/Anthem/imagenes/url80.png)
 
  
  ## 4. Enumeración de directorios
@@ -88,7 +88,7 @@ Esto permite encontrar directorios interesantes como:
 /tags                 (Status: 200) [Size: 3604]
 ```
 
-![url](imagenes/gobuster.png)
+![url](Maquinas_de_Windows/Anthem/imagenes/gobuster.png)
 
 ### 4.1 Archivo robots.txt
 
@@ -101,7 +101,7 @@ Este archivo contiene rutas ocultas que el administrador no quiere que sean inde
 Encontramos una ruta interesante que es /umbraco/ y una supuesta contraseña que es UmbracoIsTheBest!
 Vamos a inspeccionar la página web de nuevo haber si vemos información.
 
-![robots](imagenes/robots.png)
+![robots](Maquinas_de_Windows/Anthem/imagenes/robots.png)
 
 
 ```bash
@@ -112,14 +112,14 @@ http://10.130.172.154
 
 Observando la web vemos un comentario que nos llama la atención un usuario que nos da su correo.
 
-![url](imagenes/autor.png)
+![url](Maquinas_de_Windows/Anthem/imagenes/autor.png)
 
 Mirando otro artículo de la web, un usuario nos dice que el administrador se dedica a escribir poemas y nos coloca uno de los poemas.
 Los buscamos en google y aparece un nombre que es el administrador que buscamos.
 
-![url](imagenes/poema2.png)
+![url](Maquinas_de_Windows/Anthem/imagenes/poema2.png)
 
-![url](imagenes/poema.png)
+![url](Maquinas_de_Windows/Anthem/imagenes/poema.png)
 
 El nombre de nuestro Administrador es Solomon Grundy.
 
@@ -137,7 +137,7 @@ Vamos a la ruta /umbraco/ y nos encontramos con un login.
 http://10.130.172.154/umbraco/
 ```
 
-![url](imagenes/login.png)
+![url](Maquinas_de_Windows/Anthem/imagenes/login.png)
 
  Recordamos que cuando fuimos a robots, nos encontramos una contraseña y el nombre del administrador, vamos a probar a acceder con este usuario y contraseña:
 
@@ -148,7 +148,7 @@ Este fue el acertado para entrar.
 
 Accedemos al perfil del Administrador donde podemos ver todo los permisos que tiene y todo lo de la página, pero no puedo hacer nada para escalar privilegios.
 
-![url](imagenes/umbraco.png)
+![url](Maquinas_de_Windows/Anthem/imagenes/umbraco.png)
 
 
 ##  6. Acceso mediante RDP
@@ -162,12 +162,12 @@ Usaremos remmmina para acceder.
 ```bash
 remmina
 ```
-![remmina](imagenes/remmina.png)
+![remmina](Maquinas_de_Windows/Anthem/imagenes/remmina.png)
 
 Este fue el acertado para entrar. En esta no me sirvió el otro usuario, use otra de las opciones que tenía.
 Estamos dentro del ordenador y ya podemos empezar a escalar.
 
-![remoto](imagenes/remoto.png)
+![remoto](Maquinas_de_Windows/Anthem/imagenes/remoto.png)
 
 
  ##  7. Observar que usuario somos
@@ -178,7 +178,7 @@ Miramos en el ordenador remoto en la cmd, el usuario que somos ahora mismo sin e
 whoami
 ```
 
-![whoami](imagenes/whoami.png)
+![whoami](Maquinas_de_Windows/Anthem/imagenes/whoami.png)
 
 ## 8. Búsqueda de información en el ordenador.
 
@@ -186,15 +186,15 @@ Empiezo a buscar en el ordenador de la victima todas las carpetas que tiene, enc
 
 Carpetas a simple vista.
 
-![carpeta](imagenes/carpetas.png)
+![carpeta](Maquinas_de_Windows/Anthem/imagenes/carpetas.png)
 
 Carpeta oculta.
 
-![oculta](imagenes/oculta.png)
+![oculta](Maquinas_de_Windows/Anthem/imagenes/oculta.png)
 
 Dentro de la carpeta backups, hay un archivo llamado restore.txt e intento entrar pero me dice que no tengo permisos para abrirlos.
 
-![archivo](imagenes/archivo.png)
+![archivo](Maquinas_de_Windows/Anthem/imagenes/archivo.png)
 
 
 ## 9. Modificar permisos
@@ -208,9 +208,9 @@ Para ello:
 - Se selecciona la pestaña Seguridad
 - Se editan los permisos del usuario actual  y escribimos SG y lo añadimos
 
-![archivo](imagenes/permisos.png)
+![archivo](Maquinas_de_Windows/Anthem/imagenes/permisos.png)
 
-![archivo](imagenes/sg.png)
+![archivo](Maquinas_de_Windows/Anthem/imagenes/sg.png)
 
 En este caso, se observa que el usuario tiene permisos suficientes para leer el contenido del archivo, por lo que se habilita el acceso.
 
@@ -228,11 +228,11 @@ Este valor tiene toda la pinta de ser una contraseña en texto plano, almacenada
 
 Buscamos powerShell y la cmd y le doy a ejecutar como administrador, me pide una contraseña y uso la que encontré y accedo, soy administrador pero no soy system.
 
-![admin](imagenes/admin.png)
+![admin](Maquinas_de_Windows/Anthem/imagenes/admin.png)
 
-![admin](imagenes/admin2.png)
+![admin](Maquinas_de_Windows/Anthem/imagenes/admin2.png)
 
-![admin](imagenes/admin3.png)
+![admin](Maquinas_de_Windows/Anthem/imagenes/admin3.png)
 
 
 ## 11. Escalada a SYSTEM
@@ -267,6 +267,6 @@ El resultado obtenido es:
 nt authority\system
 ```
 
-![admin](imagenes/system.png)
+![admin](Maquinas_de_Windows/Anthem/imagenes/system.png)
 
 Esto confirma que el proceso se ha ejecutado con privilegios SYSTEM, el nivel más alto dentro del sistema operativo.

@@ -24,57 +24,6 @@
 .vignette ul {
     margin-left: 1.2rem;
 }
-/* --- Tarjetas para secciones principales --- */
-.card {
-    background: #f8fbff;
-    border-radius: 16px;
-    box-shadow: 0 4px 24px rgba(44,62,80,0.10);
-    padding: 2rem 2rem 1.5rem 2rem;
-    margin-bottom: 2.5rem;
-    display: flex;
-    align-items: flex-start;
-    gap: 1.5rem;
-    transition: box-shadow 0.2s;
-}
-.card:hover {
-    box-shadow: 0 8px 32px rgba(44,62,80,0.16);
-}
-.card-icon {
-    font-size: 2.8rem;
-    min-width: 3.2rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #5390d9;
-    background: #eaf6fb;
-    border-radius: 50%;
-    width: 3.2rem;
-    height: 3.2rem;
-    box-shadow: 0 2px 8px rgba(44,62,80,0.07);
-}
-.card-content h2, .card-content h3 {
-    margin-top: 0;
-    margin-bottom: 0.7rem;
-    color: #1a2a40;
-}
-.card-content ul {
-    margin: 0.5rem 0 0 1.2rem;
-    padding: 0;
-}
-.about-card p {
-    margin: 0;
-    color: #22223b;
-    font-size: 1.08rem;
-    line-height: 1.7;
-}
-.studies-card ul li {
-    margin-bottom: 0.4rem;
-    color: #3a3a5a;
-    font-size: 1.04rem;
-}
-.contact-card {
-    background: linear-gradient(90deg, #eaf6fb 60%, #d6eaff 100%);
-}
 .contact-list {
     list-style: none;
     padding: 0;

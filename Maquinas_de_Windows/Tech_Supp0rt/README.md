@@ -33,7 +33,7 @@ Se ejecuta el siguiente comando:
 ```bash
 nmap -p- -sV -sC 10.129.170.255
 ```
-![nmap](imagenes/nmap.png)
+![nmap](Maquinas_de_Windows/Tech_Supp0rt/imagenes/nmap.png)
 
 Explicación del comando:
 - -p- → Escanea los 65535 puertos
@@ -53,7 +53,7 @@ Se ejecuta el siguiente comando:
 ```bash
 smbclient -L //10.129.170.255 -N
 ```
-![SMBCLIENT](imagenes/smbclient.png)
+![SMBCLIENT](Maquinas_de_Windows/Tech_Supp0rt/imagenes/smbclient.png)
 
 Explicación del comando:
 - -L → Lista los recursos compartidos disponibles en el servidor

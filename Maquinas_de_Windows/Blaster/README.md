@@ -52,7 +52,7 @@ El siguiente paso es identificar los servicios expuestos en la máquina objetivo
 ```bash
 nmap -sC -sV -Pn 10.113.152.239
 ```
-![nmap](/Maquinas_de_Windows/Anthem/imagenes/nmap.png)
+![nmap](Maquinas_de_Windows/Blaster/imagenes/nmap.png)
 
 Opciones utilizadas:
 

@@ -49,7 +49,7 @@ El siguiente paso consiste en identificar los servicios disponibles en la máqui
 nmap -sV -sC -A -Pn 10.130.176.237
 ```
 
-![Escaneo con Nmap](imagenes/nmap.png)
+![Escaneo con Nmap](Maquinas_de_Windows/Retro_CTF/imagenes/nmap.png)
 
 Opciones utilizadas:
 

@@ -46,7 +46,7 @@ El siguiente paso consiste en identificar los servicios expuestos en la máquina
 ```bash
 nmap -sC -sV 10.113.134.75
 ```
-![nmap](imagenes/nmap.png)
+![nmap](Maquinas_de_Windows/Ice/imagenes/nmap.png)
 
 Este escaneo permite descubrir puertos abiertos y versiones de servicios.
 
