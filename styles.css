@@ -1,3 +1,29 @@
+/* --- Viñeta profesional para apartados de texto --- */
+.vignette {
+    background: linear-gradient(120deg, #eaf6fb 80%, #d6eaff 100%);
+    border-left: 7px solid #5390d9;
+    border-radius: 14px;
+    box-shadow: 0 2px 16px rgba(44,62,80,0.08);
+    padding: 2rem 2.2rem 1.5rem 2.2rem;
+    margin-bottom: 2.2rem;
+    transition: box-shadow 0.2s;
+}
+.vignette:hover {
+    box-shadow: 0 6px 28px rgba(44,62,80,0.13);
+}
+.vignette h2, .vignette h3 {
+    margin-top: 0;
+    color: #1a2a40;
+}
+.vignette p, .vignette ul {
+    color: #22223b;
+    font-size: 1.08rem;
+    line-height: 1.7;
+    margin-bottom: 0.5rem;
+}
+.vignette ul {
+    margin-left: 1.2rem;
+}
 /* --- Tarjetas para secciones principales --- */
 .card {
     background: #f8fbff;
