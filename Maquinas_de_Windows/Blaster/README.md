@@ -201,7 +201,7 @@ Al ejecutarlo aparece una ventana de User Account Control (UAC) solicitando priv
 
 El programa abre Internet Explorer.
 
-![internet](./imagenes/internet.png)
+![internet](Maquinas_de_Windows/Blaster/imagenes/internet.png)
 
 
 ## 9. Bypass del UAC

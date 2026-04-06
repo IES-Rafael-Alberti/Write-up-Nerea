@@ -268,5 +268,5 @@ Utilicé el comando getsystem para escalar a privilegios del sistema máximo.
 getsystem
 ```
 
-![admin ](Maquinas_de_Windows/Ice/imagenes/admin.PNG)
+![admin ](Maquinas_de_Windows/Ice/imagenes/admin.png)
 
