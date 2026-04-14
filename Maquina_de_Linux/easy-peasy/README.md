@@ -96,7 +96,7 @@ Buscamos cadenas codificadas en base64 o base62 en el código fuente de las pág
 
 ```bash
 curl -A “a18672860d0510e5ab6699730763b250” http://10.128.135.59:65524/
-```
+![nano](Maquina_de_Linux/easy-peasy/imagenes/nano.png)
 
 ![curl](imagenes/curl.png)
 
@@ -106,7 +106,7 @@ Aquí oculto hay un hidden está codificado con base62: ObsJmP173N2X6dOrAgEAL0Vu
 /n0th1ng3ls3m4tt3r
 ```
 
-Vamos de nuevo al navegador y colocamos esta ruta 
+![john](Maquina_de_Linux/easy-peasy/imagenes/john.png)
 
 ```bash
 http://10.128.135.59:65524/n0th1ng3ls3m4tt3r/
@@ -118,12 +118,12 @@ Obtenemos algo como hash 940d71e8655ac41efb5f8ab850668505b86dd64186a66e57d1483e7
 
 ![codigo](imagenes/codigo.png)
 
-Guardamos la imagen, le damos al enlace azul de la imagen y le damos a guardar como...
+![binary](Maquina_de_Linux/easy-peasy/imagenes/binary.png)
 
 ![hidden](imagenes/hidden.png)
 
 Para comprobarlo y saber qué tipo de hash es, utilice el identificador de hash.
-Hemos obtenido que puede ser SHA-256 o Havel-56.
+![enlace](Maquina_de_Linux/easy-peasy/imagenes/enlace.png)
 
 ![hash](imagenes/hash.png)
 
@@ -134,7 +134,7 @@ Creamos un archivo con el hash que hemos encontrado antes
 
 ```bash
 nano hash1.txt
-```
+![cyber](Maquina_de_Linux/easy-peasy/imagenes/cyber.png)
 ![nano](imagenes/nano.png)
 
 Escribimos dentro el hash y lo guardamos
@@ -148,7 +148,7 @@ john --wordlist=~/Descargas/easypeasy_1596838725703.txt --format=gost has1.txt
 
 La contraseña es: mypasswordforthatjob 
 
-
+![ssh](Maquina_de_Linux/easy-peasy/imagenes/ssh.png)
 ## 5. Esteganografía y Extracción de Credenciales
 
 Volvemos a la página de números binarios y descargamos la imagen, utilizamos la herramienta steghide para extraer información oculta.
@@ -164,7 +164,7 @@ Usaremos la contraseña: mypasswordforthatjob
 
 Para hacer este paso bien y no tener errores, descargar la imagen desde el enlace azul de aqui 
 http://10.128.135.59:65524/n0th1ng3ls3m4tt3r/
-
+![ls](Maquina_de_Linux/easy-peasy/imagenes/ls.png)
 ```bash
 cat secrettext.txt
 ```
@@ -175,8 +175,6 @@ Si la contraseña está en binario, usa CyberChef para convertirla a texto. Vamo
 La contraseña es: iconvertedmypasswordtobinary
 
 ## 6. Acceso SSH
-
-Con las credenciales obtenidas, accede por SSH al puerto 6498:
 
 Utilizamos el usuario que nos puso el secrettext.txt que es boring y la contraseña que obtuvimos del binario que es iconvertedmypasswordtobinary
 
@@ -189,7 +187,6 @@ ssh -p 6498 boring@10.129.178.176
 
 Enumera permisos y crontabs:
 
-Este script mysecretcronjob.sh se ejecuta cada minuto, por lo que podemos agregar código aquí para obtener acceso de root.
 
 ```bash
 sudo -l
@@ -213,7 +210,7 @@ Esto hace:
 - Copia /bin/bash a /tmp/rootbash
 - Le asigna permiso SUID
 
-Dado que el script es ejecutado por un cronjob, se espera aproximadamente 1 minuto.
+![root](Maquina_de_Linux/easy-peasy/imagenes/root.png)
 
 Luego se comprueba:
 

@@ -42,7 +42,7 @@ Escaneo completo de puertos:
 ```bash
 nmap -sS -sV -A 10.128.142.83
 ```
-![nmap](imagenes/nmap.png)
+![nmap](Maquina_de_Linux/RootMe/imagenes/nmap.png)
 
 Observo que los puertos 22 (SSH) y 80 (HTTP) están abiertos.
 
@@ -53,7 +53,7 @@ Observo que los puertos 22 (SSH) y 80 (HTTP) están abiertos.
 Accedo a http://10.128.142.83 en el navegador para ver la web principal.
 
 
-![css](imagenes/url.png)
+![css](Maquina_de_Linux/RootMe/imagenes/url.png)
 
 Busco directorios ocultos con:
 
@@ -61,7 +61,7 @@ Busco directorios ocultos con:
 gobuster dir -u http://10.128.142.83/ -w /usr/share/wordlists/dirb/common.txt -t 5
 ```
 
-![css](imagenes/gobuster.png)
+![css](Maquina_de_Linux/RootMe/imagenes/gobuster.png)
 
 Encuentro un directorio interesantes
 
@@ -73,15 +73,15 @@ Vamos a navegar dentro de cada ruta para ver si realmente son lo que dice.
 
 Primero miramos el css y vemos que  que son simples archivos de css
 
-![css](imagenes/css.png)
+![css](Maquina_de_Linux/RootMe/imagenes/css.png)
 
 El segundo que vamos a mirar es el js para ver si es lo que  dice ser y observamos que si.
 
-![js](imagenes/js.png)
+![js](Maquina_de_Linux/RootMe/imagenes/js.png)
 
 Por último miramos la ruta panel  que es interesante.
 
-![panel](imagenes/panel.png)
+![panel](Maquina_de_Linux/RootMe/imagenes/panel.png)
 ---
 
 
@@ -103,15 +103,15 @@ https://github.com/pentestmonkey/php-reverse-shell?source=post_page-----ff4a8bce
 
 Después de editarlo, lo pasamos a la página del panel y lo subimos, nos dara error porque no deja subir archivos php.
 
-![php](imagenes/php.png)
+![php](Maquina_de_Linux/RootMe/imagenes/php.png)
 
 Como no nos deja probamos con otra extension, usaremos la de php5 y la subimos y así si nos deja.
 
-![php](imagenes/php5.png)
+![php](Maquina_de_Linux/RootMe/imagenes/php5.png)
 
 Luego vamos a la ruta http://10.128.142.83/uploads/ para ver si se subió y vemos nuestro archivo subido.
 
-![uploads](imagenes/shell.png)
+![uploads](Maquina_de_Linux/RootMe/imagenes/shell.png)
 
 ---
 
@@ -124,7 +124,7 @@ nc -lvnp 1234
 ```
 Luego vamos a la ruta http://10.128.142.83/uploads/ y le damos al archivo que subimos para que se conecte 
 
-![nc](imagenes/nc.png)
+![nc](Maquina_de_Linux/RootMe/imagenes/nc.png)
 
 Ahora tengo acceso como www-data o usuario web.
 
@@ -146,12 +146,12 @@ Mirando la lista de archivos, nos encontramos con uno que me llama la atención.
 /usr/bin/python2.7
 ```
 
-![find2](imagenes/find2.png)
+![find2](Maquina_de_Linux/RootMe/imagenes/find2.png)
 
 
 Buscamos técnicas de explotación en https://gtfobins.org/. En el buscador ponemos python y nos sale una para SUID, vamos a usar ese comando.
 
-![python](imagenes/python.png)
+![python](Maquina_de_Linux/RootMe/imagenes/python.png)
 
 ```bash
 /usr/bin/python -c 'import os; os.execl("/bin/sh","sh","-p")'
@@ -163,7 +163,7 @@ El parámetro -p hace que la shell mantenga los privilegios de root.
 
 Ahora escribimos whoami para ver si somos root
 
-![whoami](imagenes/root.png)
+![whoami](Maquina_de_Linux/RootMe/imagenes/root.png)
 
 Observamos que somos root y tenemos acceso a todas las máquinas.
 

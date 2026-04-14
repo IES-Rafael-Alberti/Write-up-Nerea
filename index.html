@@ -12,23 +12,45 @@
 <body>
     <div class="container">
         <nav class="sidebar">
-            <h1>Portfolio</h1>
-            <ul>
-                <li><a href="#sobre-mi" onclick="navigateMenu(event, 'sobre-mi')">Sobre mí</a></li>
-                <li><a href="#contacto" onclick="navigateMenu(event, 'contacto')">Contacto</a></li>
-                <li><a href="#proyectos" onclick="navigateMenu(event, 'proyectos')">Proyectos</a>
-                    <ul class="submenu">
-                        <li><a href="#Anthem" onclick="navigateWriteup(event, 'Anthem')">Anthem</a></li>
-                        <li><a href="#Blaster" onclick="navigateWriteup(event, 'Blaster')">Blaster</a></li>
-                        <li><a href="#Blue" onclick="navigateWriteup(event, 'Blue')">Blue</a></li>
-                        <li><a href="#Ice" onclick="navigateWriteup(event, 'Ice')">Ice</a></li>
-                        <li><a href="#Library" onclick="navigateWriteup(event, 'Library')">Library</a></li>
-                        <li><a href="#Retro_CTF" onclick="navigateWriteup(event, 'Retro_CTF')">Retro_CTF</a></li>
-                        <li><a href="#Revelant" onclick="navigateWriteup(event, 'Revelant')">Revelant</a></li>
-                        <li><a href="#Tech_Supp0rt" onclick="navigateWriteup(event, 'Tech_Supp0rt')">Tech_Supp0rt</a></li>
-                    </ul>
-                </li>
-            </ul>
+                        <h1>Portfolio</h1>
+                        <ul>
+                                <li><a href="#sobre-mi" onclick="navigateMenu(event, 'sobre-mi')">Sobre mí</a></li>
+                                <li><a href="#contacto" onclick="navigateMenu(event, 'contacto')">Contacto</a></li>
+                                <li>
+                                    <a href="#proyectos" onclick="navigateMenu(event, 'proyectos')">Proyectos</a>
+                                    <ul class="submenu">
+                                        <li>
+                                            <a href="#" class="dropdown-btn" onclick="toggleDropdown(event, 'windows-dropdown')">Write-up Windows <span class="arrow">▼</span></a>
+                                            <ul class="dropdown-content" id="windows-dropdown">
+                                                <li><a href="#Anthem" onclick="navigateWriteup(event, 'Anthem', 'windows')">Anthem</a></li>
+                                                <li><a href="#Blaster" onclick="navigateWriteup(event, 'Blaster', 'windows')">Blaster</a></li>
+                                                <li><a href="#Blue" onclick="navigateWriteup(event, 'Blue', 'windows')">Blue</a></li>
+                                                <li><a href="#Ice" onclick="navigateWriteup(event, 'Ice', 'windows')">Ice</a></li>
+                                                <li><a href="#Retro_CTF" onclick="navigateWriteup(event, 'Retro_CTF', 'windows')">Retro_CTF</a></li>
+                                                <li><a href="#Revelant" onclick="navigateWriteup(event, 'Revelant', 'windows')">Revelant</a></li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="dropdown-btn" onclick="toggleDropdown(event, 'linux-dropdown')">Write-up Linux <span class="arrow">▼</span></a>
+                                            <ul class="dropdown-content" id="linux-dropdown">
+                                                <li><a href="#Tech_Supp0rt" onclick="navigateWriteup(event, 'Tech_Supp0rt', 'linux')">Tech_Supp0rt</a></li>
+                                                <li><a href="#Agent-Sudo" onclick="navigateWriteup(event, 'Agent-Sudo', 'linux')">Agent-Sudo</a></li>
+                                                <li><a href="#easy-peasy" onclick="navigateWriteup(event, 'easy-peasy', 'linux')">easy-peasy</a></li>
+                                                <li><a href="#basic-pentesting" onclick="navigateWriteup(event, 'basic-pentesting', 'linux')">basic-pentesting</a></li>
+                                                <li><a href="#Library" onclick="navigateWriteup(event, 'Library', 'linux')">Library</a></li>
+                                                <li><a href="#RootMe" onclick="navigateWriteup(event, 'RootMe', 'linux')">RootMe</a></li>
+                                                <li><a href="#Kenobi-badr" onclick="navigateWriteup(event, 'Kenobi-badr', 'linux')">Kenobi-badr</a></li>
+                                                <li><a href="#Startup" onclick="navigateWriteup(event, 'Startup', 'linux')">Startup</a></li>
+                                                <li><a href="#GamingServer" onclick="navigateWriteup(event, 'GamingServer', 'linux')">GamingServer</a></li>
+                                                <li><a href="#Bounty-Hacker" onclick="navigateWriteup(event, 'Bounty-Hacker', 'linux')">Bounty-Hacker</a></li>
+                                                <li><a href="#LazyAdmin" onclick="navigateWriteup(event, 'LazyAdmin', 'linux')">LazyAdmin</a></li>
+                                                <li><a href="#Brooklyn99" onclick="navigateWriteup(event, 'Brooklyn99', 'linux')">Brooklyn99</a></li>
+                                                <li><a href="#Poster" onclick="navigateWriteup(event, 'Poster', 'linux')">Poster</a></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                        </ul>
         </nav>
         <main class="content">
             <section id="sobre-mi" class="section">
@@ -73,9 +95,14 @@
                 document.getElementById('writeup-viewer').innerHTML = '';
             }
         }
-        function loadWriteup(machine) {
+        function loadWriteup(machine, os) {
             showSection('proyectos');
-            const path = `Maquinas_de_Windows/${machine}/README.md`;
+            let path = '';
+            if (os === 'windows') {
+                path = `Maquinas_de_Windows/${machine}/README.md`;
+            } else {
+                path = `Maquina_de_Linux/${machine}/README.md`;
+            }
             fetch(path)
                 .then(response => {
                     if (!response.ok) throw new Error('No se pudo cargar el write-up.');
@@ -93,26 +120,83 @@
             window.location.hash = sectionId;
             showSection(sectionId);
         }
-        function navigateWriteup(event, machine) {
+        function navigateWriteup(event, machine, os) {
             event.preventDefault();
-            window.location.hash = machine;
-            loadWriteup(machine);
+            window.location.hash = machine + '-' + os;
+            loadWriteup(machine, os);
         }
         function handleHashChange() {
             const hash = window.location.hash.replace('#', '');
             const sections = ['sobre-mi', 'contacto', 'proyectos'];
-            const machines = ['Anthem','Blaster','Blue','Ice','Library','Retro_CTF','Revelant','Tech_Supp0rt'];
+            const windows = ['Anthem','Blaster','Blue','Ice','Retro_CTF','Revelant'];
+            const linux = ['Tech_Supp0rt','Agent-Sudo','easy-peasy','basic-pentesting','Library','RootMe','Kenobi-badr','Startup','GamingServer','Bounty-Hacker','LazyAdmin','Brooklyn99','Poster'];
             if (sections.includes(hash)) {
                 showSection(hash);
-            } else if (machines.includes(hash)) {
-                loadWriteup(hash);
+            } else if (windows.some(m => hash === m + '-windows')) {
+                loadWriteup(hash.replace('-windows',''), 'windows');
+            } else if (linux.some(m => hash === m + '-linux')) {
+                loadWriteup(hash.replace('-linux',''), 'linux');
             } else {
                 showSection('sobre-mi');
             }
         }
+        function toggleDropdown(event, dropdownId) {
+            event.preventDefault();
+            const dropdown = document.getElementById(dropdownId);
+            dropdown.classList.toggle('show');
+            // Cierra el otro dropdown si está abierto
+            if (dropdownId === 'windows-dropdown') {
+                document.getElementById('linux-dropdown').classList.remove('show');
+            } else {
+                document.getElementById('windows-dropdown').classList.remove('show');
+            }
+        }
         window.addEventListener('hashchange', handleHashChange);
-        // Mostrar sección según hash al cargar
         handleHashChange();
     </script>
+</script>
+<style>
+    .dropdown-btn {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        background: none;
+        border: none;
+        color: #1a2a40;
+        font-weight: 500;
+        font-size: 1rem;
+        cursor: pointer;
+        padding: 0.2rem 0.5rem;
+        border-radius: 6px;
+        transition: background 0.2s, color 0.2s;
+    }
+    .dropdown-btn:hover, .dropdown-btn.active {
+        background: #5390d9;
+        color: #fff;
+    }
+    .arrow {
+        margin-left: 0.5rem;
+        font-size: 0.9em;
+        transition: transform 0.2s;
+    }
+    .dropdown-content {
+        display: none;
+        list-style: none;
+        padding-left: 1.2rem;
+        margin: 0.2rem 0 0 0;
+    }
+    .dropdown-content.show {
+        display: block;
+        animation: fadeIn 0.2s;
+    }
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+    .dropdown-content li a {
+        padding-left: 0.5rem;
+    }
+</style>
 </body>
 </html>

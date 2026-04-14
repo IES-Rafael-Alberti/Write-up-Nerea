@@ -114,7 +114,7 @@ Explicación de los parámetros utilizados:
 - -l indica el usuario que se va a probar.
 
 - -P especifica el diccionario de contraseñas.
-
+![hydra](/Maquina_de_Linux/Library/imagenes/hydra.png)
 - ssh:// define el servicio objetivo.
 
 - 10.114.169.81 es la dirección IP de la máquina víctima.
@@ -126,7 +126,7 @@ Una vez encontrada la contraseña correcta, es posible utilizarla para acceder a
 ## 7. Acceso al sistema mediante SSH
 
 Una vez obtenidas las credenciales del usuario meliodas, se procede a acceder al sistema utilizando el protocolo SSH.
-
+![ssh](/Maquina_de_Linux/Library/imagenes/ssh.png)
 El comando utilizado es el siguiente:
 
 ```bash
@@ -144,7 +144,7 @@ iloveyou1
 ## 8. Enumeración para escalada de privilegios
 
 Una vez obtenido acceso al sistema como el usuario meliodas, el siguiente objetivo es intentar conseguir privilegios de administrador (root).
-
+![sudo](/Maquina_de_Linux/Library/imagenes/sudo.png)
 Para ello se comprueba qué comandos puede ejecutar el usuario con sudo utilizando el siguiente comando:
 
 ```bash
@@ -166,7 +166,7 @@ Este tipo de configuración es peligrosa porque permite ejecutar un script con p
 
 ## 9. Modificación del script bak.py
 
-Dado que el archivo bak.py se encuentra en el directorio del usuario meliodas, es posible modificar su contenido.
+![bak](/Maquina_de_Linux/Library/imagenes/bak.png)
 
 Primero se elimina el archivo original:
 
@@ -175,7 +175,7 @@ rm bak.py
 ```
 No saldrá si deseamos eliminar el archivo:
 
-```bash
+![scripts](/Maquina_de_Linux/Library/imagenes/archivo.png)
 y
 ```
 Después se crea uno nuevo:
@@ -203,7 +203,7 @@ Una vez modificado el archivo bak.py con el código que ejecuta una shell del si
 
 Recordemos que anteriormente se comprobó con el comando sudo -l que el usuario meliodas puede ejecutar este script con privilegios de administrador sin necesidad de introducir contraseña.
 
-Para ello se ejecuta el siguiente comando:
+![root](/Maquina_de_Linux/Library/imagenes/root.png)
 
 ```bash
 sudo /usr/bin/python3 /home/meliodas/bak.py
