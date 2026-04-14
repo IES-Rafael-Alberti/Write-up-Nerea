@@ -31,7 +31,7 @@ El siguiente paso consiste en identificar los servicios expuestos en la máquina
 ```bash
 nmap -sV -sC 10.129.174.100
 ```
-![nmap](imagenes/nmap.png)
+![nmap](Maquina_de_Linux/Kenobi-badr/imagenes/nmap.png)
 
 El escaneo revela los siguientes servicios abiertos:
 
@@ -67,7 +67,7 @@ Vemos un archivo llamado log.txt el cual nos descargamos a nuestra maquina con e
 ```bash
 get log.txt
 ```
-![smb](imagenes/smb.png)
+![smb](Maquina_de_Linux/Kenobi-badr/imagenes/smb.png)
 
 Una vez descargado en nuestra máquina, se analiza el archivo en busca de información relevante.
 
@@ -75,7 +75,7 @@ En su contenido se observa información sobre el servicio FTP que se está ejecu
 
 Por otro lado, en el escaneo realizado con Nmap también se identificó el puerto 111 abierto, correspondiente al servicio RPCBIND.
 
-![cat](imagenes/cat.png)
+![cat](Maquina_de_Linux/Kenobi-badr/imagenes/cat.png)
 
 
 ## 4. Enumeración avanzada del servicio NFS
@@ -93,7 +93,7 @@ El recurso compartido disponible es:
 ```bash
 /var *
 ```
-![111](Maquinas_de_Linux/Kenobi-badr/imagenes/111.png)
+![111](Maquina_de_Linux/Kenobi-badr/imagenes/111.png)
 
 Esto indica que el directorio /var está exportado y accesible.
 
@@ -169,7 +169,7 @@ Utilizamos este otro para enviarlo a la ruta que queremos
 SITE CPTO /var/tmp/id_rsa (envía el archivo copiado al destino que le hemos indicado)
 ```
 
-![nc](Maquinas_de_Linux/Kenobi-badr/imagenes/nc.png)
+![nc](Maquina_de_Linux/Kenobi-badr/imagenes/nc.png)
 
 
 ## 7. Montaje del directorio NFS y obtención de la clave privada
@@ -202,7 +202,7 @@ cd /mnt/kenobi
 ```bash
 ll
 ```
-![nc](Maquinas_de_Linux/Kenobi-badr/imagenes/ll.png)
+![nc](Maquina_de_Linux/Kenobi-badr/imagenes/ll.png)
 
 
 ### 7.3 Obtención de la clave privada
@@ -216,7 +216,7 @@ cd tmp
 ```bash
 ll
 ```
-![cd](Maquinas_de_Linux/Kenobi-badr/imagenes/tmp.png)
+![cd](Maquina_de_Linux/Kenobi-badr/imagenes/tmp.png)
 
 Aquí encontraremos el archivo:
 
@@ -228,7 +228,7 @@ Vamos a mirar dentro del archivo.
 ```bash
 cat id_rsa
 ```
-![cat](Maquinas_de_Linux/Kenobi-badr/imagenes/key.png)
+![cat](Maquina_de_Linux/Kenobi-badr/imagenes/key.png)
 
 Vamosa copiar la clave privada.
 
@@ -241,7 +241,7 @@ Asignamos los permisos adecuados a la clave privada para que pueda ser utilizada
 ```bash
 chmod 600 ~/id_rsa_kenobi
 ```
-![600](Maquinas_de_Linux/Kenobi-badr/imagenes/cp.png)
+![600](Maquina_de_Linux/Kenobi-badr/imagenes/cp.png)
 
 
 ## 8. Acceso inicial mediante SSH
@@ -254,7 +254,7 @@ ssh -i ~/id_rsa_kenobi kenobi@10.129.147.162
 
 Si la conexión es correcta, obtendremos acceso al sistema.
 
-![ssh](Maquinas_de_Linux/Kenobi-badr/imagenes/ssh.png)
+![ssh](Maquina_de_Linux/Kenobi-badr/imagenes/ssh.png)
 
 
 ## 9. Escalada de privilegios
@@ -269,7 +269,7 @@ find / -perm -u=s -type f 2>/dev/null
 - -u=s: indicamos los permisos SUID
 - 2>/dev/null: Indicamos mande los errores a una especie de agujero negro en linux
 
-![find](Maquinas_de_Linux/Kenobi-badr/imagenes/find.png)
+![find](Maquina_de_Linux/Kenobi-badr/imagenes/find.png)
 
 El binario “ /usr/bin/menú” ejecuta un script con 3 tareas: status check, kernel versión e ifconfig.
 
@@ -281,7 +281,7 @@ El binario “ /usr/bin/menú” ejecuta un script con 3 tareas: status check, k
 1
 ```
 
-![usr](Maquinas_de_Linux/Kenobi-badr/imagenes/usr.png)
+![usr](Maquina_de_Linux/Kenobi-badr/imagenes/usr.png)
 
 Este script nos automatiza 3 procesos y hace los mismo que si lo hiciéramos manual con:
 
@@ -313,7 +313,7 @@ Ejecutamos nuevamente el binario:
 ```
 Seleccionamos la opción que utiliza curl.
 
-![echo](Maquinas_de_Linux/Kenobi-badr/imagenes/echo.png)
+![echo](Maquina_de_Linux/Kenobi-badr/imagenes/echo.png)
 
 
 ## 10. Obtención de acceso root
@@ -330,4 +330,4 @@ Resultado:
 ```bash
 root
 ```
-![root](Maquinas_de_Linux/Kenobi-badr/imagenes/root.png)
+![root](Maquina_de_Linux/Kenobi-badr/imagenes/root.png)

@@ -43,7 +43,7 @@ Escaneo completo de puertos:
 nmap -sC -sV -p- -T4 10.130.149.247
 ```
 
-![nmap](imagenes/nmap.png)
+![nmap](Maquina_de_Linux/Brooklyn99/imagenes/nmap.png)
 
 Resultados:
 - 21/tcp → FTP (vsftpd 3.0.3) → acceso anónimo permitido

