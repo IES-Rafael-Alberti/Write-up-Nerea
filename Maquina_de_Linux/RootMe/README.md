@@ -173,7 +173,7 @@ Observamos que somos root y tenemos acceso a todas las máquinas.
 
 Compruebo que soy root con:
 
-```
+```bash
 whoami
 id
 ```

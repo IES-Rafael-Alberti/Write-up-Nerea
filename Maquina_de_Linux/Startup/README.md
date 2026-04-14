@@ -544,7 +544,7 @@ Se accede al archivo:
 ```bash
 cat /root/root.txt
 ```
-![root](imagenes/catroot.png)
+![root](Maquina_de_Linux/Poster/imagenes/catroot.png)
 
 Obtenemos la flag:
 

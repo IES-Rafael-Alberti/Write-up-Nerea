@@ -31,7 +31,7 @@ El siguiente paso consiste en identificar los servicios expuestos en la máquina
 ```bash
 nmap -sV -sC 10.129.174.100
 ```
-![nmap](/Maquina_de_Linux/Kenobi-badr/imagenes/nmap.png)
+![nmap](imagenes/nmap.png)
 
 El escaneo revela los siguientes servicios abiertos:
 
@@ -67,7 +67,7 @@ Vemos un archivo llamado log.txt el cual nos descargamos a nuestra maquina con e
 ```bash
 get log.txt
 ```
-![smb](/Maquina_de_Linux/Kenobi-badr/imagenes/smb.png)
+![smb](imagenes/smb.png)
 
 Una vez descargado en nuestra máquina, se analiza el archivo en busca de información relevante.
 
@@ -75,7 +75,7 @@ En su contenido se observa información sobre el servicio FTP que se está ejecu
 
 Por otro lado, en el escaneo realizado con Nmap también se identificó el puerto 111 abierto, correspondiente al servicio RPCBIND.
 
-![cat](/Maquina_de_Linux/Kenobi-badr/imagenes/cat.png)
+![cat](imagenes/cat.png)
 
 
 ## 4. Enumeración avanzada del servicio NFS

