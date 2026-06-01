@@ -5,9 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portfolio de Nerea</title>
     <link rel="stylesheet" href="styles.css">
-    <!-- GitHub Markdown CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.5.1/github-markdown-light.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 </head>
 <body>
     <div class="container">
@@ -20,36 +17,13 @@
                     <a href="#proyectos" onclick="navigateMenu(event, 'proyectos')">Proyectos</a>
                     <ul class="submenu">
                         <li>
-                            <a href="#" class="dropdown-btn" onclick="toggleDropdown(event, 'windows-dropdown')">Write-up Windows <span class="arrow">▼</span></a>
+                            <button type="button" class="dropdown-btn" onclick="toggleDropdown(event, 'windows-dropdown')">Write-up Windows <span class="arrow">▼</span></button>
                             <ul class="dropdown-content" id="windows-dropdown">
-                                <li><a href="#Anthem" onclick="navigateWriteup(event, 'Anthem', 'windows')">Anthem</a></li>
-                                <li><a href="#Blaster" onclick="navigateWriteup(event, 'Blaster', 'windows')">Blaster</a></li>
-                                <li><a href="#Blue" onclick="navigateWriteup(event, 'Blue', 'windows')">Blue</a></li>
-                                <li><a href="#Ice" onclick="navigateWriteup(event, 'Ice', 'windows')">Ice</a></li>
-                                <li><a href="#Retro_CTF" onclick="navigateWriteup(event, 'Retro_CTF', 'windows')">Retro_CTF</a></li>
-                                <li><a href="#Revelant" onclick="navigateWriteup(event, 'Revelant', 'windows')">Revelant</a></li>
                             </ul>
                         </li>
                         <li>
-                            <a href="#" class="dropdown-btn" onclick="toggleDropdown(event, 'linux-dropdown')">Write-up Linux <span class="arrow">▼</span></a>
+                            <button type="button" class="dropdown-btn" onclick="toggleDropdown(event, 'linux-dropdown')">Write-up Linux <span class="arrow">▼</span></button>
                             <ul class="dropdown-content" id="linux-dropdown">
-                                <li><a href="#Tech_Supp0rt" onclick="navigateWriteup(event, 'Tech_Supp0rt', 'linux')">Tech_Supp0rt</a></li>
-                                <li><a href="#Agent-Sudo" onclick="navigateWriteup(event, 'Agent-Sudo', 'linux')">Agent-Sudo</a></li>
-                                <li><a href="#easy-peasy" onclick="navigateWriteup(event, 'easy-peasy', 'linux')">easy-peasy</a></li>
-                                <li><a href="#basic-pentesting" onclick="navigateWriteup(event, 'basic-pentesting', 'linux')">basic-pentesting</a></li>
-                                <li><a href="#Library" onclick="navigateWriteup(event, 'Library', 'linux')">Library</a></li>
-                                <li><a href="#RootMe" onclick="navigateWriteup(event, 'RootMe', 'linux')">RootMe</a></li>
-                                <li><a href="#Kenobi-badr" onclick="navigateWriteup(event, 'Kenobi-badr', 'linux')">Kenobi-badr</a></li>
-                                <li><a href="#Startup" onclick="navigateWriteup(event, 'Startup', 'linux')">Startup</a></li>
-                                <li><a href="#GamingServer" onclick="navigateWriteup(event, 'GamingServer', 'linux')">GamingServer</a></li>
-                                <li><a href="#Bounty-Hacker" onclick="navigateWriteup(event, 'Bounty-Hacker', 'linux')">Bounty-Hacker</a></li>
-                                <li><a href="#LazyAdmin" onclick="navigateWriteup(event, 'LazyAdmin', 'linux')">LazyAdmin</a></li>
-                                <li><a href="#Brooklyn99" onclick="navigateWriteup(event, 'Brooklyn99', 'linux')">Brooklyn99</a></li>
-                                <li><a href="#Poster" onclick="navigateWriteup(event, 'Poster', 'linux')">Poster</a></li>
-                                <li><a href="#Ignite" onclick="navigateWriteup(event, 'Ignite', 'linux')">Ignite</a></li>
-                                <li><a href="#Wgel-CTF" onclick="navigateWriteup(event, 'Wgel-CTF', 'linux')">Wgel-CTF</a></li>
-                                <li><a href="#Year-of-the-Rabbit" onclick="navigateWriteup(event, 'Year-of-the-Rabbit', 'linux')">Year-of-the-Rabbit</a></li>
-                                <li><a href="#Lian_Yu" onclick="navigateWriteup(event, 'Lian_Yu', 'linux')">Lian_Yu</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -82,9 +56,22 @@
                 </div>
             </section>
             <section id="proyectos" class="section" style="display:none;">
-                <h2>Write-ups de Máquinas de Windows</h2>
-                <p>Selecciona una máquina en el menú para ver su write-up en formato Markdown.</p>
-                <div id="writeup-viewer" class="writeup-viewer markdown-body"></div>
+                <div class="vignette">
+                    <h2>Write-ups</h2>
+                    <p>Accede al README exacto de cada máquina en GitHub. Los enlaces están separados por Linux y Windows para que puedas ir directamente al write-up correspondiente.</p>
+
+                    <div class="writeup-columns">
+                        <div class="writeup-group">
+                            <h3>Máquinas Linux</h3>
+                            <ul id="linux-catalog" class="writeup-list"></ul>
+                        </div>
+
+                        <div class="writeup-group">
+                            <h3>Máquinas Windows</h3>
+                            <ul id="windows-catalog" class="writeup-list"></ul>
+                        </div>
+                    </div>
+                </div>
             </section>
         </main>
     </div>
@@ -92,61 +79,115 @@
         <p>Repositorio privado en GitHub.</p>
     </footer>
     <script>
+        const WRITEUP_BASE_URL = 'https://github.com/IES-Rafael-Alberti/Write-up-Nerea/blob/main';
+        const WRITEUPS = {
+            linux: [
+                'Tech_Supp0rt',
+                'Agent-Sudo',
+                'easy-peasy',
+                'basic-pentesting',
+                'Library',
+                'RootMe',
+                'Kenobi-badr',
+                'Startup',
+                'GamingServer',
+                'Bounty-Hacker',
+                'LazyAdmin',
+                'Brooklyn99',
+                'Poster',
+                'Ignite',
+                'Wgel-CTF',
+                'Year-of-the-Rabbit',
+                'Lian_Yu'
+            ],
+            windows: [
+                'Anthem',
+                'Blaster',
+                'Blue',
+                'Ice',
+                'Retro_CTF',
+                'Revelant'
+            ]
+        };
+
+        function buildWriteupUrl(os, machine) {
+            const folder = os === 'windows' ? 'Maquinas_de_Windows' : 'Maquina_de_Linux';
+            return `${WRITEUP_BASE_URL}/${folder}/${machine}/README.md`;
+        }
+
+        function createWriteupLink(machine, os, compact = false) {
+            const item = document.createElement('li');
+            const link = document.createElement('a');
+            link.className = compact ? 'writeup-menu-link' : 'writeup-card';
+            link.href = buildWriteupUrl(os, machine);
+            link.target = '_blank';
+            link.rel = 'noopener noreferrer';
+            const folderLabel = os === 'windows' ? 'Maquinas_de_Windows' : 'Maquina_de_Linux';
+            link.innerHTML = compact
+                ? `<span class="writeup-menu-text">${machine}</span>`
+                : `
+                <span class="writeup-card-title">${machine}</span>
+                <span class="writeup-card-meta">${folderLabel}/<strong>${machine}</strong>/README.md</span>
+                <span class="writeup-card-badge">GitHub</span>
+            `;
+            item.appendChild(link);
+            return item;
+        }
+
+        function renderWriteupCatalog() {
+            const linuxCatalog = document.getElementById('linux-catalog');
+            const windowsCatalog = document.getElementById('windows-catalog');
+            const linuxDropdown = document.getElementById('linux-dropdown');
+            const windowsDropdown = document.getElementById('windows-dropdown');
+
+            linuxCatalog.innerHTML = '';
+            windowsCatalog.innerHTML = '';
+            linuxDropdown.innerHTML = '';
+            windowsDropdown.innerHTML = '';
+
+            WRITEUPS.linux.forEach(machine => {
+                linuxCatalog.appendChild(createWriteupLink(machine, 'linux'));
+                linuxDropdown.appendChild(createWriteupLink(machine, 'linux', true));
+            });
+
+            WRITEUPS.windows.forEach(machine => {
+                windowsCatalog.appendChild(createWriteupLink(machine, 'windows'));
+                windowsDropdown.appendChild(createWriteupLink(machine, 'windows', true));
+            });
+        }
+
         function showSection(sectionId) {
             document.querySelectorAll('.section').forEach(sec => sec.style.display = 'none');
             document.getElementById(sectionId).style.display = 'block';
-            if(sectionId !== 'proyectos') {
-                document.getElementById('writeup-viewer').innerHTML = '';
-            }
         }
-        function loadWriteup(machine, os) {
-            showSection('proyectos');
-            let path = '';
-            if (os === 'windows') {
-                path = `Maquinas_de_Windows/${machine}/README.md`;
-            } else {
-                path = `Maquina_de_Linux/${machine}/README.md`;
-            }
-            fetch(path)
-                .then(response => {
-                    if (!response.ok) throw new Error('No se pudo cargar el write-up.');
-                    return response.text();
-                })
-                .then(md => {
-                    document.getElementById('writeup-viewer').innerHTML = marked.parse(md, {gfm: true, breaks: true});
-                })
-                .catch(err => {
-                    document.getElementById('writeup-viewer').innerHTML = '<p style="color:red;">No se pudo cargar el write-up.</p>';
-                });
-        }
+
         function navigateMenu(event, sectionId) {
             event.preventDefault();
-            window.location.hash = sectionId;
+            globalThis.location.hash = sectionId;
             showSection(sectionId);
         }
-        function navigateWriteup(event, machine, os) {
-            event.preventDefault();
-            window.location.hash = machine;
-            loadWriteup(machine, os);
-        }
+
         function handleHashChange() {
-            const hash = window.location.hash.replace('#', '');
+            const hash = globalThis.location.hash.replace('#', '');
             const sections = ['sobre-mi', 'contacto', 'proyectos'];
-            const windows = ['Anthem','Blaster','Blue','Ice','Retro_CTF','Revelant'];
-            const linux = ['Tech_Supp0rt','Agent-Sudo','easy-peasy','basic-pentesting','Library','RootMe','Kenobi-badr','Startup','GamingServer','Bounty-Hacker','LazyAdmin','Brooklyn99','Poster','Ignite','Wgel-CTF','Year-of-the-Rabbit','Lian_Yu'];
+            const windows = WRITEUPS.windows;
+            const linux = WRITEUPS.linux;
             if (sections.includes(hash)) {
                 showSection(hash);
             } else if (windows.includes(hash)) {
-                loadWriteup(hash, 'windows');
+                showSection('proyectos');
             } else if (linux.includes(hash)) {
-                loadWriteup(hash, 'linux');
+                showSection('proyectos');
             } else {
                 showSection('sobre-mi');
             }
         }
-        window.addEventListener('hashchange', handleHashChange);
-        // Mostrar sección según hash al cargar
-        handleHashChange();
+        globalThis.addEventListener('hashchange', handleHashChange);
+
+        document.addEventListener('DOMContentLoaded', () => {
+            renderWriteupCatalog();
+            handleHashChange();
+        });
 
         // Dropdown logic
         function toggleDropdown(event, dropdownId) {
